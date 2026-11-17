@@ -1,0 +1,13 @@
+<div class="field image-field">
+  <label for="<%= id %>"><%= label %></label>
+  <div class="image-field-row">
+    <div class="image-preview">
+      <img id="<%= id %>-preview" data-image-preview="<%= id %>" src="<%= safeImage(value, '/images/hero-forest.jpg') %>" alt="">
+    </div>
+    <div class="image-field-copy">
+      <input id="<%= id %>" type="text" name="<%= name %>" value="<%= value %>" list="image-options" data-image-input data-preview-for="<%= id %>" spellcheck="false">
+      <small><%= hint %></small>
+      <small>Type a path, paste an image URL, choose a built-in image, or upload one in the <a href="/admin/media" target="_blank" rel="noopener">media library</a>.</small>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= pageTitle ? `${pageTitle} · ${content.site.title}` : content.site.title %></title>
+  <meta name="description" content="<%= pageDescription || content.site.metaDescription %>">
+  <meta name="robots" content="<%= noindex ? 'noindex, nofollow' : 'index, follow' %>">
+  <meta name="theme-color" content="<%= content.theme.background %>">
+  <% if (canInlineEdit) { %>
+  <meta name="csrf-token" content="<%= csrfToken %>">
+  <% } %>
+  <link rel="canonical" href="<%= canonicalUrl %>">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:site_name" content="<%= content.site.title %>">
+  <meta property="og:title" content="<%= pageTitle ? `${pageTitle} · ${content.site.title}` : content.site.title %>">
+  <meta property="og:description" content="<%= pageDescription || content.site.metaDescription %>">
+  <meta property="og:url" content="<%= canonicalUrl %>">
+  <meta property="og:image" content="<%= ogImage %>">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= pageTitle ? `${pageTitle} · ${content.site.title}` : content.site.title %>">
+  <meta name="twitter:description" content="<%= pageDescription || content.site.metaDescription %>">
+  <meta name="twitter:image" content="<%= ogImage %>">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <% if (preloadImage) { %>
+  <link rel="preload" href="<%= preloadImage %>" as="image" fetchpriority="high">
+  <% } %>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    :root {
+      --bg: <%= content.theme.background %>;
+      --surface: <%= content.theme.surface %>;
+      --surface-soft: <%= content.theme.surfaceSoft %>;
+      --ink: <%= content.theme.ink %>;
+      --muted: <%= content.theme.muted %>;
+      --accent: <%= content.theme.accent %>;
+      --sage: <%= content.theme.sage %>;
+      --glow: <%= content.theme.glow %>;
+      --paper: <%= content.theme.paper %>;
+      --paper-ink: <%= content.theme.paperInk %>;
+    }
+  </style>
+</head>
+<body class="<%= bodyClass || '' %><%= canInlineEdit ? ' has-inline-editor' : '' %>">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <%- include('icons') %>
+  <% if (preview) { %>
+  <div class="preview-banner" role="status">
+    <span><strong>Preview</strong> — this is an unpublished draft, visible only to you.</span>
+    <a href="/admin">Back to dashboard</a>
+  </div>
+  <% } %>

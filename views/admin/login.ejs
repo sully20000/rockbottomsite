@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · Rock Bottom – The Way Back</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b2429">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="auth-body">
+  <%- include('../partials/icons') %>
+  <div class="auth-shell">
+    <section class="auth-visual" aria-label="Rock Bottom – The Way Back">
+      <img src="/images/hero-forest.jpg" alt="A quiet forest lake at first light" class="auth-visual-image">
+      <div class="auth-visual-overlay" aria-hidden="true"></div>
+      <a class="auth-brand" href="/">
+        <span class="admin-brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" focusable="false">
+            <path d="M8 33V19a12 12 0 0 1 24 0v14" />
+            <circle cx="20" cy="19" r="3.6" fill="currentColor" />
+            <path d="M20 8v3" />
+            <path d="M10.4 11.4l2.1 2.1" />
+            <path d="M29.6 11.4l-2.1 2.1" />
+            <path d="M4 19h3" />
+            <path d="M33 19h3" />
+            <path d="M13 33h14" />
+            <path d="M16 37h8" />
+          </svg>
+        </span>
+        <span><strong>Rock Bottom</strong><small>The Way Back</small></span>
+      </a>
+      <div class="auth-quote">
+        <p>“You don’t have to climb the whole mountain today. Just take the next step.”</p>
+        <span>Administrator dashboard</span>
+      </div>
+      <p class="auth-visual-note">This area is private. Public visitors can only read the published website.</p>
+    </section>
+
+    <section class="auth-panel">
+      <div class="auth-form-wrap">
+        <a class="auth-back" href="/"><%- icon('arrow-right') %> Back to the website</a>
+        <p class="admin-kicker"><%- icon('lock') %> Secure administrator access</p>
+        <h1>Welcome back</h1>
+        <p class="auth-intro">Sign in to edit the website, manage support details and preview changes before they go live.</p>
+
+        <% if (notice) { %>
+          <div class="admin-notice admin-notice-success" role="status"><%- icon('check') %><span><%= notice %></span></div>
+        <% } %>
+        <% if (error) { %>
+          <div class="admin-notice admin-notice-error" role="alert"><%- icon('warning') %><span><%= error %></span></div>
+        <% } %>
+
+        <form method="post" action="/admin/login" class="auth-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label class="field">
+            <span>Username</span>
+            <input type="text" name="username" autocomplete="username" required maxlength="40" autofocus>
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input type="password" name="password" autocomplete="current-password" required>
+          </label>
+          <button class="admin-button admin-button-primary admin-button-wide" type="submit">
+            Sign in <%- icon('arrow-right') %>
+          </button>
+        </form>
+
+        <% if (typeof canSetup !== 'undefined' && canSetup) { %>
+          <p class="auth-hint">First time here? <a href="/admin/setup">Set up the administrator account</a>.</p>
+        <% } else { %>
+          <p class="auth-hint">This website already has its administrator account. Sign in above. If you have forgotten the password, run <code>npm run create-admin</code> on the server to reset it.</p>
+        <% } %>
+        <p class="auth-small"><%- icon('shield') %> Passwords are stored securely. Sessions expire automatically after 12 hours.</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

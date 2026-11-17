@@ -1,0 +1,6 @@
+<% if (admin && !canInlineEdit) { %>
+<a class="owner-edit-link" href="<%= editHref %>" rel="nofollow">
+  <%- icon('sparkles') %>
+  <span>Edit this page</span>
+</a>
+<% } %>

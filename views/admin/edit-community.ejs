@@ -1,0 +1,68 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">Community</p>
+    <h2>You don’t have to go through this alone</h2>
+    <p>This section links to an independently operated forum. Be clear that you do not run or moderate it.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview draft</a>
+</div>
+
+<form method="post" action="/admin/edit/community" class="admin-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="eyebrow" value="<%= draft.community.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading</span>
+        <input type="text" name="heading" value="<%= draft.community.heading %>" maxlength="160">
+      </label>
+      <label class="field field-full">
+        <span>Paragraphs</span>
+        <textarea name="paragraphs" rows="6"><%= draft.community.paragraphs.join('\n') %></textarea>
+        <small>One paragraph per line.</small>
+      </label>
+      <label class="field">
+        <span>Button label</span>
+        <input type="text" name="buttonLabel" value="<%= draft.community.buttonLabel %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Forum URL</span>
+        <input type="url" name="url" value="<%= draft.community.url %>" maxlength="300">
+        <small>The link always opens in a new tab.</small>
+      </label>
+      <label class="field field-full">
+        <span>Independent forum disclaimer</span>
+        <textarea name="disclaimer" rows="4" maxlength="900"><%= draft.community.disclaimer %></textarea>
+      </label>
+      <%- include('../partials/admin-image-field', {
+        id: 'community-image',
+        name: 'image',
+        label: 'Background image',
+        value: draft.community.image,
+        hint: 'An open sky, a path or a wide landscape works well.'
+      }) %>
+      <label class="field field-full">
+        <span>Image description for screen readers</span>
+        <input type="text" name="imageAlt" value="<%= draft.community.imageAlt %>" maxlength="240">
+      </label>
+    </div>
+  </section>
+
+  <%- include('../partials/admin-image-options') %>
+
+  <div class="admin-save-bar">
+    <div><strong>Save to draft</strong><span>Check the forum link still works before publishing.</span></div>
+    <div class="admin-save-actions">
+      <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview</a>
+      <button class="admin-button admin-button-primary" type="submit">Save draft <%- icon('check') %></button>
+    </div>
+  </div>
+</form>
+
+<%- include('../partials/admin-foot') %>

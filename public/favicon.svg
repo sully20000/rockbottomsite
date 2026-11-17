@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Rock Bottom – The Way Back">
+  <rect width="64" height="64" rx="15" fill="#256353"/>
+  <path d="M13 53V30a19 19 0 0 1 38 0v23" fill="none" stroke="#fffdf8" stroke-width="2.8" stroke-linecap="round"/>
+  <circle cx="32" cy="30" r="5.8" fill="#ffd88f"/>
+  <g fill="none" stroke="#ffd88f" stroke-width="2.4" stroke-linecap="round">
+    <path d="M32 12v5"/>
+    <path d="m16.5 17.5 3.4 3.4"/>
+    <path d="m47.5 17.5-3.4 3.4"/>
+    <path d="M5 30h5"/>
+    <path d="M54 30h5"/>
+  </g>
+  <path d="M20 53h24" fill="none" stroke="#fffdf8" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M24 59h16" fill="none" stroke="#9fd8c3" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

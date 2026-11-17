@@ -1,0 +1,48 @@
+<% if (typeof visitorCount !== 'undefined' && visitorCount !== null) { %>
+<div class="visitor-strip">
+  <div class="container">
+    <p><%- icon('eye') %> <span<%- editAttr('visitor.label') %>><%= content.visitor.label %></span>: <strong data-visitor-count="<%= visitorCount %>"><%= formatNumber(visitorCount) %></strong> <span class="visitor-note"<%- editAttr('visitor.note') %>><%= content.visitor.note %></span></p>
+  </div>
+</div>
+<% } %>
+
+<footer class="site-footer">
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <a class="brand" href="/" aria-label="<%= content.site.title %> — home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" focusable="false">
+            <path d="M8 33V19a12 12 0 0 1 24 0v14" />
+            <circle cx="20" cy="19" r="3.6" fill="currentColor" />
+            <path d="M20 8v3" />
+            <path d="M10.4 11.4l2.1 2.1" />
+            <path d="M29.6 11.4l-2.1 2.1" />
+            <path d="M4 19h3" />
+            <path d="M33 19h3" />
+            <path d="M13 33h14" />
+            <path d="M16 37h8" />
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name"><%= content.hero.title.split('–')[0].trim() %></span>
+          <span class="brand-sub"><%= content.hero.title.split('–').slice(1).join('–').trim() || 'The Way Back' %></span>
+        </span>
+      </a>
+      <p class="footer-message"<%- editAttr('footer.message') %>><%= content.footer.message %></p>
+      <p class="footer-closing"<%- editAttr('footer.closing') %>><%= content.footer.closing %></p>
+    </div>
+
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/disclaimer"><span<%- editAttr('footer.disclaimerLabel') %>><%= content.footer.disclaimerLabel %></span></a>
+      <a href="/privacy"><span<%- editAttr('footer.privacyLabel') %>><%= content.footer.privacyLabel %></span></a>
+      <a href="/#support"><span<%- editAttr('footer.supportLabel') %>><%= content.footer.supportLabel %></span></a>
+      <a href="<%= content.community.url %>" target="_blank" rel="noopener noreferrer"><span<%- editAttr('footer.forumLabel') %>><%= content.footer.forumLabel %></span> <%- icon('external') %></a>
+    </nav>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© <%= new Date().getFullYear() %> <span<%- editAttr('footer.copyright') %>><%= content.footer.copyright %></span>. <span<%- editAttr('ui.rights') %>><%= content.ui.rights %></span></p>
+    <p<%- editAttr('footer.emergencyNote') %>><%= content.footer.emergencyNote %></p>
+    <p class="footer-small"><span<%- editAttr('footer.credits') %>><%= content.footer.credits %></span> <a href="/admin" rel="nofollow"><%= content.ui.adminLabel %></a></p>
+  </div>
+</footer>

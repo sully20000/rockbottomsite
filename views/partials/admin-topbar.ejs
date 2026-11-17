@@ -1,0 +1,29 @@
+<header class="admin-topbar">
+  <div class="admin-topbar-title">
+    <button type="button" class="icon-button admin-menu-button" data-admin-menu aria-label="Open admin menu" aria-expanded="false">
+      <%- icon('menu') %>
+    </button>
+    <div>
+      <p>Administrator</p>
+      <h1><%= pageTitle %></h1>
+    </div>
+  </div>
+  <div class="admin-topbar-actions">
+    <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener">
+      <%- icon('eye') %><span>Preview draft</span>
+    </a>
+    <a class="admin-button admin-button-ghost admin-hide-small" href="/" target="_blank" rel="noopener">
+      <%- icon('external') %><span>View site</span>
+    </a>
+    <% if (hasChanges) { %>
+      <form method="post" action="/admin/publish" class="inline-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="admin-button admin-button-primary" type="submit">
+          <%- icon('upload') %><span>Publish changes</span>
+        </button>
+      </form>
+    <% } else { %>
+      <span class="admin-status-pill"><%- icon('check') %> Published</span>
+    <% } %>
+  </div>
+</header>

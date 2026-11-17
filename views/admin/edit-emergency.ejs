@@ -1,0 +1,105 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">Urgent help</p>
+    <h2>Emergency support</h2>
+    <p>Keep this section clear and unmissable. In the UK, immediate danger is 999 or A&amp;E; urgent mental health support in England is NHS 111 (mental health option).</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview draft</a>
+</div>
+
+<form method="post" action="/admin/edit/emergency" class="admin-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="eyebrow" value="<%= draft.emergency.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading</span>
+        <input type="text" name="heading" value="<%= draft.emergency.heading %>" maxlength="160">
+      </label>
+      <label class="field field-full">
+        <span>Urgent help text</span>
+        <textarea name="intro" rows="5" maxlength="1200"><%= draft.emergency.intro %></textarea>
+      </label>
+      <label class="field field-full">
+        <span>Reassurance note</span>
+        <textarea name="note" rows="3" maxlength="700"><%= draft.emergency.note %></textarea>
+      </label>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Contact cards</p><h2>Ways to get help now</h2></div>
+      <button class="admin-button admin-button-ghost" type="button" data-add-row="emergency-rows" data-template="emergency-row-template">
+        <%- icon('plus') %> Add a contact
+      </button>
+    </div>
+
+    <div class="admin-repeater" id="emergency-rows">
+      <% draft.emergency.cards.forEach(function(card, index) { %>
+        <fieldset class="admin-repeater-row" data-repeater-row data-index="<%= index %>">
+          <legend><span data-row-number><%= index + 1 %></span> · <%= card.label %></legend>
+          <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this card"><%- icon('trash') %></button>
+          <div class="admin-form-grid admin-form-grid-compact">
+            <label class="field">
+              <span>Label</span>
+              <input type="text" name="cards[<%= index %>][label]" value="<%= card.label %>" maxlength="120" required>
+            </label>
+            <label class="field">
+              <span>Large value</span>
+              <input type="text" name="cards[<%= index %>][value]" value="<%= card.value %>" maxlength="60" required>
+            </label>
+            <label class="field">
+              <span>Link</span>
+              <input type="text" name="cards[<%= index %>][href]" value="<%= card.href %>" maxlength="300" required>
+              <small>Use tel:999, tel:111, or a full https:// address.</small>
+            </label>
+            <label class="field">
+              <span>Action label</span>
+              <input type="text" name="cards[<%= index %>][actionLabel]" value="<%= card.actionLabel %>" maxlength="80" required>
+            </label>
+            <label class="field field-full">
+              <span>Small note</span>
+              <input type="text" name="cards[<%= index %>][note]" value="<%= card.note %>" maxlength="180">
+            </label>
+            <label class="checkbox-field field-full">
+              <input type="checkbox" name="cards[<%= index %>][external]" <%= card.external ? 'checked' : '' %>>
+              <span>This link opens an external website in a new tab</span>
+            </label>
+          </div>
+        </fieldset>
+      <% }) %>
+    </div>
+
+    <template id="emergency-row-template">
+      <fieldset class="admin-repeater-row" data-repeater-row data-index="__INDEX__">
+        <legend><span data-row-number>New</span> · New emergency contact</legend>
+        <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this card"><%- icon('trash') %></button>
+        <div class="admin-form-grid admin-form-grid-compact">
+          <label class="field"><span>Label</span><input type="text" name="cards[__INDEX__][label]" maxlength="120" required></label>
+          <label class="field"><span>Large value</span><input type="text" name="cards[__INDEX__][value]" maxlength="60" required></label>
+          <label class="field"><span>Link</span><input type="text" name="cards[__INDEX__][href]" maxlength="300" placeholder="tel:999" required></label>
+          <label class="field"><span>Action label</span><input type="text" name="cards[__INDEX__][actionLabel]" maxlength="80" required></label>
+          <label class="field field-full"><span>Small note</span><input type="text" name="cards[__INDEX__][note]" maxlength="180"></label>
+          <label class="checkbox-field field-full"><input type="checkbox" name="cards[__INDEX__][external]"><span>Opens an external website in a new tab</span></label>
+        </div>
+      </fieldset>
+    </template>
+  </section>
+
+  <div class="admin-save-bar">
+    <div><strong>Save to draft</strong><span>Emergency wording should stay short and direct.</span></div>
+    <div class="admin-save-actions">
+      <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview</a>
+      <button class="admin-button admin-button-primary" type="submit">Save draft <%- icon('check') %></button>
+    </div>
+  </div>
+</form>
+
+<%- include('../partials/admin-foot') %>

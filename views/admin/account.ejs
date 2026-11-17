@@ -1,0 +1,80 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">Security</p>
+    <h2>Your account</h2>
+    <p>One administrator account controls the website. Keep its password long, unique and somewhere safe.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin/system"><%- icon('settings') %> System information</a>
+</div>
+
+<div class="admin-overview-grid">
+  <section class="admin-card">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Signed in as</p>
+        <h2><%= admin.username %></h2>
+      </div>
+      <span class="admin-status-pill"><%- icon('check') %> Administrator</span>
+    </div>
+
+    <dl class="admin-detail-list">
+      <div><dt>Username</dt><dd><%= admin.username %></dd></div>
+      <div><dt>Account created</dt><dd><%= admin.created_at ? formatDate(admin.created_at, { hour: '2-digit', minute: '2-digit' }) : '—' %></dd></div>
+      <div><dt>Last signed in</dt><dd><%= admin.last_login ? formatDate(admin.last_login, { hour: '2-digit', minute: '2-digit' }) : 'This is your first session' %></dd></div>
+      <div><dt>Session length</dt><dd>Up to 12 hours, then you will need to sign in again</dd></div>
+      <div><dt>Password storage</dt><dd>Hashed with scrypt. The plain password is never stored.</dd></div>
+    </dl>
+
+    <div class="admin-tip">
+      <span><%- icon('shield') %></span>
+      <p><strong>Public visitors cannot edit anything.</strong> All editing routes check the server-side session. Hiding buttons in the browser is never used as security.</p>
+    </div>
+  </section>
+
+  <aside class="admin-card">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Change password</p>
+        <h2>Keep it private</h2>
+      </div>
+    </div>
+
+    <form method="post" action="/admin/account/password" class="admin-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label class="field">
+        <span>Current password</span>
+        <input type="password" name="currentPassword" autocomplete="current-password" required>
+      </label>
+      <label class="field">
+        <span>New password</span>
+        <input type="password" name="newPassword" autocomplete="new-password" minlength="12" required>
+        <small>At least 12 characters. A long phrase is easier to remember and harder to guess.</small>
+      </label>
+      <label class="field">
+        <span>Confirm new password</span>
+        <input type="password" name="confirmPassword" autocomplete="new-password" minlength="12" required>
+      </label>
+      <button class="admin-button admin-button-primary admin-button-wide" type="submit">Update password <%- icon('check') %></button>
+    </form>
+    <p class="admin-field-note">Changing your password signs out any other browser session. Your current session stays signed in.</p>
+  </aside>
+</div>
+
+<section class="admin-card">
+  <div class="admin-card-head">
+    <div>
+      <p class="admin-kicker">A safe setup</p>
+      <h2>Four things worth doing today</h2>
+    </div>
+  </div>
+  <div class="admin-quick-grid admin-quick-grid-wide">
+    <a href="/admin/account"><%- icon('lock') %><span><strong>Use a password manager</strong><small>Store this password somewhere you will not lose it.</small></span></a>
+    <a href="/admin/system"><%- icon('shield') %><span><strong>Check the security status</strong><small>Confirm HTTPS, production mode and backups.</small></span></a>
+    <a href="/admin/edit/support"><%- icon('heart') %><span><strong>Check support details</strong><small>Verify numbers and opening hours periodically.</small></span></a>
+    <a href="/admin/edit/pages"><%- icon('book') %><span><strong>Read the legal pages</strong><small>Keep the disclaimer and privacy notice accurate.</small></span></a>
+  </div>
+</section>
+
+<%- include('../partials/admin-foot') %>

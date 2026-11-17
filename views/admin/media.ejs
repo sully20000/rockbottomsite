@@ -1,0 +1,115 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">Images</p>
+    <h2>Your media library</h2>
+    <p>Upload your own photography, then use its path anywhere the website asks for an image.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin/edit/home"><%- icon('home') %> Edit homepage</a>
+</div>
+
+<div class="admin-overview-grid">
+  <section class="admin-card">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Upload</p>
+        <h2>Add an image</h2>
+      </div>
+      <span class="admin-status-pill"><%- icon('image') %> <%= media.length %> uploaded</span>
+    </div>
+
+    <form method="post" action="/admin/media/upload" enctype="multipart/form-data" class="admin-upload-form" data-upload-form>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label class="upload-drop" for="media-files">
+        <span class="upload-drop-icon"><%- icon('upload') %></span>
+        <strong>Choose images to upload</strong>
+        <span>JPG, PNG, WebP or AVIF · up to 8MB each · up to 10 at once</span>
+        <input id="media-files" type="file" name="images" accept="image/jpeg,image/png,image/webp,image/avif" multiple required data-upload-input>
+      </label>
+      <div class="upload-selection" data-upload-selection hidden></div>
+      <button class="admin-button admin-button-primary" type="submit"><%- icon('upload') %> Upload images</button>
+    </form>
+
+    <div class="admin-tip">
+      <span><%- icon('info') %></span>
+      <p><strong>Good images to use:</strong> wide nature scenes with soft light, plenty of calm space and no text. Landscape photographs at least 1800px wide work best for backgrounds.</p>
+    </div>
+  </section>
+
+  <aside class="admin-card">
+    <p class="admin-kicker">Built-in photography</p>
+    <h2>Nature images included</h2>
+    <p class="admin-muted">These images came with the website and can be used without uploading anything.</p>
+    <div class="built-in-image-list">
+      <% [
+        { url: '/images/hero-forest.jpg', label: 'Forest lake at first light' },
+        { url: '/images/ferns.jpg', label: 'Forest path in sunlight' },
+        { url: '/images/calm-lake.jpg', label: 'Calm mountain lake' },
+        { url: '/images/sunrise-path.jpg', label: 'Lone tree under an open sky' }
+      ].forEach(function(image) { %>
+        <div class="built-in-image-row">
+          <img src="<%= image.url %>" alt="" loading="lazy">
+          <span><strong><%= image.label %></strong><small><%= image.url %></small></span>
+          <button class="admin-icon-button" type="button" data-copy-url="<%= image.url %>" aria-label="Copy path for <%= image.label %>" title="Copy path"><%- icon('external') %></button>
+        </div>
+      <% }) %>
+    </div>
+    <p class="admin-field-note">Photography via Unsplash. Update the photo credit in <a href="/admin/edit/pages">Footer &amp; legal pages</a> if you replace these images.</p>
+  </aside>
+</div>
+
+<section class="admin-card admin-media-library">
+  <div class="admin-card-head">
+    <div>
+      <p class="admin-kicker">Uploaded images</p>
+      <h2>Library</h2>
+    </div>
+  </div>
+
+  <% if (media.length) { %>
+    <div class="media-grid">
+      <% media.forEach(function(item) { %>
+        <article class="media-card">
+          <a class="media-card-image" href="/uploads/<%= item.filename %>" target="_blank" rel="noopener">
+            <img src="/uploads/<%= item.filename %>" alt="<%= item.original_name %>" loading="lazy">
+          </a>
+          <div class="media-card-body">
+            <strong title="<%= item.original_name %>"><%= item.original_name %></strong>
+            <span><%= Math.max(1, Math.round(item.size / 1024)) %> KB · <%= formatDate(item.created_at) %></span>
+            <code>/uploads/<%= item.filename %></code>
+            <div class="media-card-actions">
+              <button class="admin-button admin-button-tiny admin-button-ghost" type="button" data-copy-url="/uploads/<%= item.filename %>">Copy path</button>
+              <form method="post" action="/admin/media/<%= item.id %>/delete" data-confirm="Remove this image permanently? Any page still using it will show a broken image.">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button class="admin-button admin-button-tiny admin-button-danger" type="submit"><%- icon('trash') %> Delete</button>
+              </form>
+            </div>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="admin-empty">
+      <span><%- icon('image') %></span>
+      <h3>No images uploaded yet</h3>
+      <p>Use the upload box above to add your first photograph. You can still use the four built-in nature images in the meantime.</p>
+    </div>
+  <% } %>
+</section>
+
+<section class="admin-card">
+  <div class="admin-card-head">
+    <div>
+      <p class="admin-kicker">How it works</p>
+      <h2>Using an uploaded image</h2>
+    </div>
+  </div>
+  <div class="admin-steps-list">
+    <div><span>1</span><p>Upload an image here and press <strong>Copy path</strong>.</p></div>
+    <div><span>2</span><p>Open the page you want to change, such as the homepage, ten steps or community section.</p></div>
+    <div><span>3</span><p>Paste the path into the image field, or choose it from the suggestions list. Save the draft, preview it, then publish.</p></div>
+  </div>
+</section>
+
+<%- include('../partials/admin-foot') %>

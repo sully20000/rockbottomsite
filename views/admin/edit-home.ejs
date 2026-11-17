@@ -1,0 +1,223 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">Homepage content</p>
+    <h2>The first thing someone reads</h2>
+    <p>Keep this warm, simple and human. Every word below appears on the public homepage.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview draft</a>
+</div>
+
+<form method="post" action="/admin/edit/home" class="admin-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Site identity</p><h2>Name and search listing</h2></div>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Site name</span>
+        <input type="text" name="site[name]" value="<%= draft.site.name %>" maxlength="80">
+      </label>
+      <label class="field">
+        <span>Browser and search title</span>
+        <input type="text" name="site[title]" value="<%= draft.site.title %>" maxlength="120">
+      </label>
+      <label class="field field-full">
+        <span>Search description</span>
+        <textarea name="site[metaDescription]" rows="3" maxlength="320"><%= draft.site.metaDescription %></textarea>
+        <small>Around 150–160 characters works best in search results.</small>
+      </label>
+      <label class="field">
+        <span>Contact email (optional)</span>
+        <input type="email" name="site[contactEmail]" value="<%= draft.site.contactEmail %>" maxlength="160">
+        <small>Only shown if you add it to the footer or privacy page.</small>
+      </label>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Opening screen</p><h2>Hero section</h2></div>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="hero[eyebrow]" value="<%= draft.hero.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Main heading</span>
+        <input type="text" name="hero[title]" value="<%= draft.hero.title %>" maxlength="140">
+        <small>Use an en dash (–) to split the two lines if you want the same look.</small>
+      </label>
+      <label class="field field-full">
+        <span>Introduction</span>
+        <textarea name="hero[intro]" rows="4" maxlength="1600"><%= draft.hero.intro %></textarea>
+      </label>
+      <label class="field">
+        <span>Primary button label</span>
+        <input type="text" name="hero[primaryCta]" value="<%= draft.hero.primaryCta %>" maxlength="80">
+      </label>
+      <label class="field field-full">
+        <span>Small note under the button</span>
+        <input type="text" name="hero[scrollLabel]" value="<%= draft.hero.scrollLabel %>" maxlength="140">
+      </label>
+      <%- include('../partials/admin-image-field', {
+        id: 'hero-image',
+        name: 'hero[image]',
+        label: 'Hero background image',
+        value: draft.hero.image,
+        hint: 'A wide, calming landscape works best. Dark on the left side helps the heading stay readable.'
+      }) %>
+      <label class="field field-full">
+        <span>Image description for screen readers</span>
+        <input type="text" name="hero[imageAlt]" value="<%= draft.hero.imageAlt %>" maxlength="240">
+      </label>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">A note from you</p><h2>The personal letter</h2></div>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="letter[eyebrow]" value="<%= draft.letter.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading</span>
+        <input type="text" name="letter[heading]" value="<%= draft.letter.heading %>" maxlength="180">
+      </label>
+      <label class="field field-full">
+        <span>Letter paragraphs</span>
+        <textarea name="letter[paragraphs]" rows="8"><%= draft.letter.paragraphs.join('\n') %></textarea>
+        <small>One paragraph per line. The first one appears slightly larger.</small>
+      </label>
+      <label class="field">
+        <span>Signature</span>
+        <input type="text" name="letter[signature]" value="<%= draft.letter.signature %>" maxlength="100">
+      </label>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Near the top</p><h2>Disclaimer</h2></div>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Label</span>
+        <input type="text" name="disclaimer[label]" value="<%= draft.disclaimer.label %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Short version (hero card)</span>
+        <input type="text" name="disclaimer[shortText]" value="<%= draft.disclaimer.shortText %>" maxlength="160">
+      </label>
+      <label class="field field-full">
+        <span>Full disclaimer</span>
+        <textarea name="disclaimer[text]" rows="5" maxlength="1600"><%= draft.disclaimer.text %></textarea>
+        <small>Please keep the medical disclaimer clear and visible. It should not be hidden in the footer.</small>
+      </label>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Three gentle starting points</p><h2>“I don’t know where to start”</h2></div>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="startHelper[eyebrow]" value="<%= draft.startHelper.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading</span>
+        <input type="text" name="startHelper[heading]" value="<%= draft.startHelper.heading %>" maxlength="160">
+      </label>
+      <label class="field field-full">
+        <span>Introduction</span>
+        <textarea name="startHelper[intro]" rows="3" maxlength="900"><%= draft.startHelper.intro %></textarea>
+      </label>
+      <label class="field">
+        <span>Close button label</span>
+        <input type="text" name="startHelper[closeLabel]" value="<%= draft.startHelper.closeLabel %>" maxlength="40">
+      </label>
+    </div>
+
+    <div class="admin-repeater admin-repeater-static">
+      <% draft.startHelper.options.forEach(function(option, index) { %>
+        <fieldset class="admin-repeater-row">
+          <legend>Starting point <%= index + 1 %></legend>
+          <div class="admin-form-grid admin-form-grid-compact">
+            <label class="field">
+              <span>Icon</span>
+              <select name="startHelper[options][<%= index %>][icon]">
+                <% ICON_NAMES.forEach(function(iconName) { %>
+                  <option value="<%= iconName %>" <%= option.icon === iconName ? 'selected' : '' %>><%= ICON_LABELS[iconName] || iconName %></option>
+                <% }) %>
+              </select>
+            </label>
+            <label class="field">
+              <span>Title</span>
+              <input type="text" name="startHelper[options][<%= index %>][title]" value="<%= option.title %>" maxlength="80">
+            </label>
+            <label class="field field-full">
+              <span>Text</span>
+              <textarea name="startHelper[options][<%= index %>][text]" rows="3" maxlength="600"><%= option.text %></textarea>
+            </label>
+            <label class="field">
+              <span>Link label</span>
+              <input type="text" name="startHelper[options][<%= index %>][actionLabel]" value="<%= option.actionLabel %>" maxlength="70">
+            </label>
+            <label class="field">
+              <span>Link destination</span>
+              <input type="text" name="startHelper[options][<%= index %>][actionHref]" value="<%= option.actionHref %>" maxlength="200" placeholder="#support">
+            </label>
+          </div>
+        </fieldset>
+      <% }) %>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">The last word</p><h2>Closing message</h2></div>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="closing[eyebrow]" value="<%= draft.closing.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading</span>
+        <input type="text" name="closing[heading]" value="<%= draft.closing.heading %>" maxlength="180">
+      </label>
+      <label class="field field-full">
+        <span>Supporting text</span>
+        <textarea name="closing[text]" rows="3" maxlength="600"><%= draft.closing.text %></textarea>
+      </label>
+      <label class="field">
+        <span>Button label</span>
+        <input type="text" name="closing[buttonLabel]" value="<%= draft.closing.buttonLabel %>" maxlength="80">
+      </label>
+    </div>
+  </section>
+
+  <%- include('../partials/admin-image-options') %>
+
+  <div class="admin-save-bar">
+    <div>
+      <strong>Save to draft</strong>
+      <span>Your changes stay private until you press Publish changes.</span>
+    </div>
+    <div class="admin-save-actions">
+      <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview</a>
+      <button class="admin-button admin-button-primary" type="submit">Save draft <%- icon('check') %></button>
+    </div>
+  </div>
+</form>
+
+<%- include('../partials/admin-foot') %>

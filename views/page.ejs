@@ -1,0 +1,67 @@
+<%- include('partials/public-head', {
+  content,
+  pageTitle: page.title,
+  pageDescription: page.intro,
+  canonicalUrl: origin + '/' + pageKey,
+  ogImage: origin + safeImage(content.hero.image, '/images/hero-forest.jpg'),
+  noindex: preview,
+  bodyClass: bodyClass || 'page-legal',
+  preview,
+  preloadImage: ''
+}) %>
+<%- include('partials/public-nav', { content, isHome: false, solidHeader: true }) %>
+
+<main id="main" class="legal-main">
+  <section class="page-hero">
+    <div class="container page-hero-inner reveal">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/"><span<%- editAttr('ui.homeLabel') %>><%= content.ui.homeLabel %></span></a>
+        <span aria-hidden="true">/</span>
+        <span><%= page.title %></span>
+      </nav>
+      <h1<%- editAttr('pages.' + pageKey + '.title') %>><%= page.title %></h1>
+      <p class="page-intro"<%- editAttr('pages.' + pageKey + '.intro') %>><%= page.intro %></p>
+      <p class="page-updated"><span<%- editAttr('ui.lastUpdated') %>><%= content.ui.lastUpdated %></span> <span<%- editAttr('pages.' + pageKey + '.updated') %>><%= page.updated %></span></p>
+    </div>
+  </section>
+
+  <div class="container legal-grid">
+    <article class="legal-article reveal">
+      <% page.sections.forEach(function(section, index) { %>
+        <section class="legal-block" id="section-<%= index + 1 %>">
+          <span class="legal-number" aria-hidden="true"><%= String(index + 1).padStart(2, '0') %></span>
+          <h2<%- editAttr('pages.' + pageKey + '.sections.' + index + '.heading') %>><%= section.heading %></h2>
+          <% section.paragraphs.forEach(function(paragraph, paragraphIndex) { %>
+            <p<%- editAttr('pages.' + pageKey + '.sections.' + index + '.paragraphs.' + paragraphIndex) %>><%= paragraph %></p>
+          <% }) %>
+        </section>
+      <% }) %>
+      <p class="legal-return"><a class="text-link" href="/"><span<%- editAttr('ui.backToHomepage') %>><%= content.ui.backToHomepage %></span> <%- icon('arrow-right') %></a></p>
+    </article>
+
+    <aside class="legal-aside">
+      <div class="aside-card reveal">
+        <span class="aside-icon"><%- icon('shield') %></span>
+        <h2<%- editAttr('ui.helpNowHeading') %>><%= content.ui.helpNowHeading %></h2>
+        <p<%- editAttr('ui.helpNowText') %>><%= content.ui.helpNowText %></p>
+        <a class="btn btn-primary btn-small" href="tel:999"><span<%- editAttr('ui.call999') %>><%= content.ui.call999 %></span></a>
+        <a class="text-link" href="/#emergency"><span<%- editAttr('ui.allEmergency') %>><%= content.ui.allEmergency %></span> <%- icon('arrow-right') %></a>
+      </div>
+      <div class="aside-card aside-card-soft reveal">
+        <span class="aside-icon"><%- icon('heart') %></span>
+        <h2<%- editAttr('ui.listenHeading') %>><%= content.ui.listenHeading %></h2>
+        <p<%- editAttr('ui.listenText') %>><%= content.ui.listenText %></p>
+        <a class="aside-phone" href="<%= safePhoneHref(content.ui.listenPhone, '') %>"><%- icon('phone') %> <span<%- editAttr('ui.listenPhone') %>><%= content.ui.listenPhone %></span></a>
+        <a class="text-link" href="/#support"><span<%- editAttr('ui.seeSupport') %>><%= content.ui.seeSupport %></span> <%- icon('arrow-right') %></a>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<%- include('partials/public-footer', { content, visitorCount: null }) %>
+<%- include('partials/owner-edit-link', { editHref: '/admin/preview/' + pageKey + '?edit=1' }) %>
+<%- include('partials/inline-editor') %>
+<% if (canInlineEdit) { %><script src="/js/inline-edit.js" defer></script><% } %>
+<script src="/js/main.js" defer></script>
+</body>
+</html>

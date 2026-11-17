@@ -1,0 +1,148 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">You are never alone</p>
+    <h2>Support organisations</h2>
+    <p>These cards are one of the most important parts of the site. Check every number, opening time and website against the organisation’s official page before publishing.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview draft</a>
+</div>
+
+<form method="post" action="/admin/edit/support" class="admin-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="eyebrow" value="<%= draft.support.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading</span>
+        <input type="text" name="heading" value="<%= draft.support.heading %>" maxlength="160">
+      </label>
+      <label class="field field-full">
+        <span>Subtitle</span>
+        <textarea name="subtitle" rows="3" maxlength="900"><%= draft.support.subtitle %></textarea>
+      </label>
+      <label class="field">
+        <span>“Details checked” label</span>
+        <input type="text" name="checkedLabel" value="<%= draft.support.checkedLabel %>" maxlength="120">
+        <small>Update this date whenever you verify the details.</small>
+      </label>
+      <label class="field field-full">
+        <span>Note under the cards</span>
+        <textarea name="note" rows="3" maxlength="900"><%= draft.support.note %></textarea>
+      </label>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Cards</p><h2>Organisations</h2></div>
+      <button class="admin-button admin-button-ghost" type="button" data-add-row="org-rows" data-template="org-row-template">
+        <%- icon('plus') %> Add an organisation
+      </button>
+    </div>
+
+    <div class="admin-repeater" id="org-rows">
+      <% draft.support.organisations.forEach(function(org, index) { %>
+        <fieldset class="admin-repeater-row admin-repeater-row-large" data-repeater-row data-index="<%= index %>">
+          <legend><span data-row-number><%= index + 1 %></span> · <%= org.name %></legend>
+          <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this organisation"><%- icon('trash') %></button>
+          <div class="admin-form-grid admin-form-grid-compact">
+            <label class="field">
+              <span>Organisation name</span>
+              <input type="text" name="organisations[<%= index %>][name]" value="<%= org.name %>" maxlength="120" required>
+            </label>
+            <label class="field">
+              <span>Short mark (if no logo)</span>
+              <input type="text" name="organisations[<%= index %>][mark]" value="<%= org.mark %>" maxlength="20">
+            </label>
+            <label class="field">
+              <span>Brand colour</span>
+              <div class="colour-field">
+                <input type="color" name="organisations[<%= index %>][colour]" value="<%= org.colour %>" aria-label="Brand colour for <%= org.name %>">
+                <span><%= org.colour %></span>
+              </div>
+            </label>
+            <label class="field">
+              <span>Logo image (optional)</span>
+              <input type="text" name="organisations[<%= index %>][logo]" value="<%= org.logo || '' %>" list="image-options" data-image-input data-preview-for="org-logo-<%= index %>" placeholder="/uploads/logo.png or official URL" spellcheck="false">
+              <div class="image-preview image-preview-small">
+                <img id="org-logo-<%= index %>-preview" data-image-preview="org-logo-<%= index %>" src="<%= org.logo ? safeImage(org.logo, '') : '' %>" alt="">
+              </div>
+              <small>Leave blank to use the short mark. Only use logos you have permission to display.</small>
+            </label>
+            <label class="field field-full">
+              <span>Description of support</span>
+              <textarea name="organisations[<%= index %>][description]" rows="3" maxlength="800"><%= org.description %></textarea>
+            </label>
+            <label class="field">
+              <span>Telephone number (display)</span>
+              <input type="text" name="organisations[<%= index %>][phone]" value="<%= org.phone %>" maxlength="40" placeholder="116 123">
+            </label>
+            <label class="field">
+              <span>Text support label (optional)</span>
+              <input type="text" name="organisations[<%= index %>][textLabel]" value="<%= org.textLabel %>" maxlength="100" placeholder="Text SHOUT to 85258">
+            </label>
+            <label class="field">
+              <span>Text number (optional)</span>
+              <input type="text" name="organisations[<%= index %>][textHref]" value="<%= org.textHref %>" maxlength="40" placeholder="85258">
+            </label>
+            <label class="field">
+              <span>Opening hours</span>
+              <input type="text" name="organisations[<%= index %>][hours]" value="<%= org.hours %>" maxlength="180">
+            </label>
+            <label class="field">
+              <span>Official website</span>
+              <input type="url" name="organisations[<%= index %>][website]" value="<%= org.website %>" maxlength="300" placeholder="https://">
+            </label>
+            <label class="field">
+              <span>Website link label</span>
+              <input type="text" name="organisations[<%= index %>][websiteLabel]" value="<%= org.websiteLabel %>" maxlength="100" placeholder="example.org">
+            </label>
+          </div>
+        </fieldset>
+      <% }) %>
+    </div>
+
+    <template id="org-row-template">
+      <fieldset class="admin-repeater-row admin-repeater-row-large" data-repeater-row data-index="__INDEX__">
+        <legend><span data-row-number>New</span> · New organisation</legend>
+        <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this organisation"><%- icon('trash') %></button>
+        <div class="admin-form-grid admin-form-grid-compact">
+          <label class="field"><span>Organisation name</span><input type="text" name="organisations[__INDEX__][name]" maxlength="120" required></label>
+          <label class="field"><span>Short mark (if no logo)</span><input type="text" name="organisations[__INDEX__][mark]" maxlength="20" placeholder="S"></label>
+          <label class="field"><span>Brand colour</span><div class="colour-field"><input type="color" name="organisations[__INDEX__][colour]" value="#6f8f83" aria-label="Brand colour"><span>#6f8f83</span></div></label>
+          <label class="field"><span>Logo image (optional)</span><input type="text" name="organisations[__INDEX__][logo]" list="image-options" data-image-input data-preview-for="org-logo-__INDEX__" placeholder="/uploads/logo.png or official URL" spellcheck="false"><div class="image-preview image-preview-small"><img id="org-logo-__INDEX__-preview" data-image-preview="org-logo-__INDEX__" alt=""></div><small>Leave blank to use the short mark.</small></label>
+          <label class="field field-full"><span>Description of support</span><textarea name="organisations[__INDEX__][description]" rows="3" maxlength="800"></textarea></label>
+          <label class="field"><span>Telephone number (display)</span><input type="text" name="organisations[__INDEX__][phone]" maxlength="40"></label>
+          <label class="field"><span>Text support label (optional)</span><input type="text" name="organisations[__INDEX__][textLabel]" maxlength="100"></label>
+          <label class="field"><span>Text number (optional)</span><input type="text" name="organisations[__INDEX__][textHref]" maxlength="40"></label>
+          <label class="field"><span>Opening hours</span><input type="text" name="organisations[__INDEX__][hours]" maxlength="180"></label>
+          <label class="field"><span>Official website</span><input type="url" name="organisations[__INDEX__][website]" maxlength="300" placeholder="https://"></label>
+          <label class="field"><span>Website link label</span><input type="text" name="organisations[__INDEX__][websiteLabel]" maxlength="100"></label>
+        </div>
+      </fieldset>
+    </template>
+  </section>
+
+  <div class="admin-tip">
+    <span><%- icon('warning') %></span>
+    <p><strong>Important:</strong> support details can change. Do not describe every service as a charity unless you have checked its current legal status. If you are unsure, simply call it an organisation or service.</p>
+  </div>
+
+  <%- include('../partials/admin-image-options') %>
+
+  <div class="admin-save-bar">
+    <div><strong>Save to draft</strong><span>Check the official websites before publishing any changed number.</span></div>
+    <div class="admin-save-actions">
+      <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview</a>
+      <button class="admin-button admin-button-primary" type="submit">Save draft <%- icon('check') %></button>
+    </div>
+  </div>
+</form>
+
+<%- include('../partials/admin-foot') %>

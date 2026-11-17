@@ -1,0 +1,103 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">Symptoms section</p>
+    <h2>Does any of this sound familiar?</h2>
+    <p>These are personal experiences, not a diagnosis. You can add, remove or reword any card.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview draft</a>
+</div>
+
+<form method="post" action="/admin/edit/symptoms" class="admin-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="eyebrow" value="<%= draft.symptoms.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading</span>
+        <input type="text" name="heading" value="<%= draft.symptoms.heading %>" maxlength="160">
+      </label>
+      <label class="field field-full">
+        <span>Subtitle</span>
+        <textarea name="subtitle" rows="4" maxlength="800"><%= draft.symptoms.subtitle %></textarea>
+      </label>
+      <label class="field field-full">
+        <span>Closing message</span>
+        <textarea name="closing" rows="3" maxlength="500"><%= draft.symptoms.closing %></textarea>
+      </label>
+      <label class="field field-full">
+        <span>Small note</span>
+        <textarea name="note" rows="2" maxlength="400"><%= draft.symptoms.note %></textarea>
+        <small>Keep the reminder that this is not a diagnosis. It matters.</small>
+      </label>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Cards</p><h2>Symptoms and experiences</h2></div>
+      <button class="admin-button admin-button-ghost" type="button" data-add-row="symptom-rows" data-template="symptom-row-template">
+        <%- icon('plus') %> Add a card
+      </button>
+    </div>
+
+    <div class="admin-repeater" id="symptom-rows">
+      <% draft.symptoms.items.forEach(function(item, index) { %>
+        <fieldset class="admin-repeater-row" data-repeater-row data-index="<%= index %>">
+          <legend><span data-row-number><%= index + 1 %></span> · <%= item.title %></legend>
+          <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this card"><%- icon('trash') %></button>
+          <div class="admin-form-grid admin-form-grid-compact">
+            <label class="field">
+              <span>Icon</span>
+              <select name="items[<%= index %>][icon]">
+                <% ICON_NAMES.forEach(function(iconName) { %>
+                  <option value="<%= iconName %>" <%= item.icon === iconName ? 'selected' : '' %>><%= ICON_LABELS[iconName] || iconName %></option>
+                <% }) %>
+              </select>
+            </label>
+            <label class="field">
+              <span>Text</span>
+              <input type="text" name="items[<%= index %>][title]" value="<%= item.title %>" maxlength="120" required>
+            </label>
+          </div>
+        </fieldset>
+      <% }) %>
+    </div>
+
+    <template id="symptom-row-template">
+      <fieldset class="admin-repeater-row" data-repeater-row data-index="__INDEX__">
+        <legend><span data-row-number>New</span> · New symptom card</legend>
+        <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this card"><%- icon('trash') %></button>
+        <div class="admin-form-grid admin-form-grid-compact">
+          <label class="field">
+            <span>Icon</span>
+            <select name="items[__INDEX__][icon]">
+              <% ICON_NAMES.forEach(function(iconName) { %>
+                <option value="<%= iconName %>"><%= ICON_LABELS[iconName] || iconName %></option>
+              <% }) %>
+            </select>
+          </label>
+          <label class="field">
+            <span>Text</span>
+            <input type="text" name="items[__INDEX__][title]" maxlength="120" required>
+          </label>
+        </div>
+      </fieldset>
+    </template>
+  </section>
+
+  <div class="admin-save-bar">
+    <div><strong>Save to draft</strong><span>Nothing changes publicly until you publish.</span></div>
+    <div class="admin-save-actions">
+      <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview</a>
+      <button class="admin-button admin-button-primary" type="submit">Save draft <%- icon('check') %></button>
+    </div>
+  </div>
+</form>
+
+<%- include('../partials/admin-foot') %>

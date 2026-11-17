@@ -1,0 +1,29 @@
+<%- include('partials/public-head', {
+  content,
+  pageTitle: title,
+  pageDescription: message,
+  canonicalUrl: origin + '/404',
+  ogImage: origin + safeImage(content.hero.image, '/images/hero-forest.jpg'),
+  noindex: true,
+  bodyClass: 'page-error',
+  preview: false,
+  preloadImage: ''
+}) %>
+<%- include('partials/public-nav', { content, isHome: false, solidHeader: true }) %>
+
+<main id="main" class="error-main">
+  <div class="container error-inner reveal">
+    <p class="eyebrow eyebrow-dark"><span class="eyebrow-line" aria-hidden="true"></span><%= code %></p>
+    <h1><%= title %></h1>
+    <p><%= message %></p>
+    <div class="error-actions">
+      <a class="btn btn-primary" href="/">Back to the homepage <%- icon('home') %></a>
+      <a class="btn btn-outline" href="/#support">Find support <%- icon('heart') %></a>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/public-footer', { content, visitorCount: null }) %>
+<script src="/js/main.js" defer></script>
+</body>
+</html>

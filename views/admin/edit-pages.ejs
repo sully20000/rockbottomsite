@@ -1,0 +1,153 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">Footer and legal pages</p>
+    <h2>The small print, written kindly</h2>
+    <p>These pages hold the disclaimer and privacy information. Keep them accurate, readable and easy to find.</p>
+  </div>
+  <div class="admin-page-heading-actions">
+    <a class="admin-button admin-button-ghost" href="/admin/preview/disclaimer" target="_blank" rel="noopener"><%- icon('eye') %> Preview disclaimer</a>
+    <a class="admin-button admin-button-ghost" href="/admin/preview/privacy" target="_blank" rel="noopener"><%- icon('eye') %> Preview privacy</a>
+  </div>
+</div>
+
+<form method="post" action="/admin/edit/pages" class="admin-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Footer</p><h2>Closing words and links</h2></div>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field field-full">
+        <span>Encouragement message</span>
+        <textarea name="footer[message]" rows="3" maxlength="500"><%= draft.footer.message %></textarea>
+      </label>
+      <label class="field field-full">
+        <span>Closing line</span>
+        <textarea name="footer[closing]" rows="2" maxlength="400"><%= draft.footer.closing %></textarea>
+      </label>
+      <label class="field">
+        <span>Copyright name</span>
+        <input type="text" name="footer[copyright]" value="<%= draft.footer.copyright %>" maxlength="120">
+      </label>
+      <label class="field">
+        <span>Emergency note</span>
+        <input type="text" name="footer[emergencyNote]" value="<%= draft.footer.emergencyNote %>" maxlength="180">
+      </label>
+      <label class="field">
+        <span>Disclaimer link label</span>
+        <input type="text" name="footer[disclaimerLabel]" value="<%= draft.footer.disclaimerLabel %>" maxlength="60">
+      </label>
+      <label class="field">
+        <span>Privacy link label</span>
+        <input type="text" name="footer[privacyLabel]" value="<%= draft.footer.privacyLabel %>" maxlength="60">
+      </label>
+      <label class="field">
+        <span>Support link label</span>
+        <input type="text" name="footer[supportLabel]" value="<%= draft.footer.supportLabel %>" maxlength="60">
+      </label>
+      <label class="field">
+        <span>Forum link label</span>
+        <input type="text" name="footer[forumLabel]" value="<%= draft.footer.forumLabel %>" maxlength="80">
+      </label>
+      <label class="field field-full">
+        <span>Photo credit line</span>
+        <input type="text" name="footer[credits]" value="<%= draft.footer.credits %>" maxlength="160">
+      </label>
+    </div>
+    <p class="admin-field-note">The footer forum link uses the URL from the <a href="/admin/edit/community">Community section</a>.</p>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Page one</p>
+        <h2>Disclaimer</h2>
+        <p class="admin-card-sub">Explain clearly that this is personal experience, not medical advice.</p>
+      </div>
+      <a class="admin-text-link" href="/admin/preview/disclaimer" target="_blank" rel="noopener">Preview <%- icon('external') %></a>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field"><span>Page title</span><input type="text" name="disclaimerTitle" value="<%= draft.pages.disclaimer.title %>" maxlength="80"></label>
+      <label class="field"><span>Last updated</span><input type="text" name="disclaimerUpdated" value="<%= draft.pages.disclaimer.updated %>" maxlength="60"></label>
+      <label class="field field-full"><span>Introduction</span><textarea name="disclaimerIntro" rows="3" maxlength="800"><%= draft.pages.disclaimer.intro %></textarea></label>
+    </div>
+
+    <div class="admin-repeater" id="disclaimer-section-rows">
+      <% draft.pages.disclaimer.sections.forEach(function(section, index) { %>
+        <fieldset class="admin-repeater-row" data-repeater-row data-index="<%= index %>">
+          <legend><span data-row-number><%= index + 1 %></span> · <%= section.heading %></legend>
+          <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this section"><%- icon('trash') %></button>
+          <div class="admin-form-grid admin-form-grid-compact">
+            <label class="field field-full"><span>Heading</span><input type="text" name="disclaimerSections[<%= index %>][heading]" value="<%= section.heading %>" maxlength="140"></label>
+            <label class="field field-full"><span>Paragraphs</span><textarea name="disclaimerSections[<%= index %>][paragraphs]" rows="5"><%= section.paragraphs.join('\n') %></textarea><small>One paragraph per line.</small></label>
+          </div>
+        </fieldset>
+      <% }) %>
+    </div>
+    <button class="admin-button admin-button-ghost admin-add-row-below" type="button" data-add-row="disclaimer-section-rows" data-template="disclaimer-section-template"><%- icon('plus') %> Add a section</button>
+
+    <template id="disclaimer-section-template">
+      <fieldset class="admin-repeater-row" data-repeater-row data-index="__INDEX__">
+        <legend><span data-row-number>New</span> · New section</legend>
+        <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this section"><%- icon('trash') %></button>
+        <div class="admin-form-grid admin-form-grid-compact">
+          <label class="field field-full"><span>Heading</span><input type="text" name="disclaimerSections[__INDEX__][heading]" maxlength="140"></label>
+          <label class="field field-full"><span>Paragraphs</span><textarea name="disclaimerSections[__INDEX__][paragraphs]" rows="5"></textarea></label>
+        </div>
+      </fieldset>
+    </template>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Page two</p>
+        <h2>Privacy</h2>
+        <p class="admin-card-sub">The current privacy notice covers anonymous visitor counting, security cookies and administrator sessions.</p>
+      </div>
+      <a class="admin-text-link" href="/admin/preview/privacy" target="_blank" rel="noopener">Preview <%- icon('external') %></a>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field"><span>Page title</span><input type="text" name="privacyTitle" value="<%= draft.pages.privacy.title %>" maxlength="80"></label>
+      <label class="field"><span>Last updated</span><input type="text" name="privacyUpdated" value="<%= draft.pages.privacy.updated %>" maxlength="60"></label>
+      <label class="field field-full"><span>Introduction</span><textarea name="privacyIntro" rows="3" maxlength="800"><%= draft.pages.privacy.intro %></textarea></label>
+    </div>
+
+    <div class="admin-repeater" id="privacy-section-rows">
+      <% draft.pages.privacy.sections.forEach(function(section, index) { %>
+        <fieldset class="admin-repeater-row" data-repeater-row data-index="<%= index %>">
+          <legend><span data-row-number><%= index + 1 %></span> · <%= section.heading %></legend>
+          <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this section"><%- icon('trash') %></button>
+          <div class="admin-form-grid admin-form-grid-compact">
+            <label class="field field-full"><span>Heading</span><input type="text" name="privacySections[<%= index %>][heading]" value="<%= section.heading %>" maxlength="140"></label>
+            <label class="field field-full"><span>Paragraphs</span><textarea name="privacySections[<%= index %>][paragraphs]" rows="5"><%= section.paragraphs.join('\n') %></textarea><small>One paragraph per line.</small></label>
+          </div>
+        </fieldset>
+      <% }) %>
+    </div>
+    <button class="admin-button admin-button-ghost admin-add-row-below" type="button" data-add-row="privacy-section-rows" data-template="privacy-section-template"><%- icon('plus') %> Add a section</button>
+
+    <template id="privacy-section-template">
+      <fieldset class="admin-repeater-row" data-repeater-row data-index="__INDEX__">
+        <legend><span data-row-number>New</span> · New section</legend>
+        <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this section"><%- icon('trash') %></button>
+        <div class="admin-form-grid admin-form-grid-compact">
+          <label class="field field-full"><span>Heading</span><input type="text" name="privacySections[__INDEX__][heading]" maxlength="140"></label>
+          <label class="field field-full"><span>Paragraphs</span><textarea name="privacySections[__INDEX__][paragraphs]" rows="5"></textarea></label>
+        </div>
+      </fieldset>
+    </template>
+  </section>
+
+  <div class="admin-save-bar">
+    <div><strong>Save to draft</strong><span>Legal text is important. Proofread before publishing.</span></div>
+    <div class="admin-save-actions">
+      <button class="admin-button admin-button-primary" type="submit">Save draft <%- icon('check') %></button>
+    </div>
+  </div>
+</form>
+
+<%- include('../partials/admin-foot') %>

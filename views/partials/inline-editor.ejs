@@ -1,0 +1,19 @@
+<% if (canInlineEdit) { %>
+<aside class="inline-editor" data-inline-editor data-editing="<%= editing ? 'true' : 'false' %>" aria-label="Page editor">
+  <div class="inline-editor-inner">
+    <p class="inline-editor-status" data-edit-status role="status" aria-live="polite">
+      <span class="inline-editor-dot" aria-hidden="true"></span>
+      <span data-edit-message><%= editing ? 'Editing the draft. Highlighted text can be changed. Nothing is public until you publish.' : 'Read-only preview. Start editing to change text, or publish the saved draft.' %></span>
+    </p>
+    <div class="inline-editor-actions">
+      <button class="ie-btn ie-btn-ghost" type="button" data-edit-toggle aria-pressed="<%= editing ? 'true' : 'false' %>">
+        <%= editing ? 'Stop editing' : 'Start editing' %>
+      </button>
+      <button class="ie-btn ie-btn-primary" type="button" data-edit-save <%= editing ? '' : 'hidden' %> disabled>Save draft</button>
+      <button class="ie-btn ie-btn-accent" type="button" data-edit-publish>Publish</button>
+      <button class="ie-btn ie-btn-ghost" type="button" data-edit-reload <%= editing ? '' : 'hidden' %>>Reload draft</button>
+      <a class="ie-btn ie-btn-link" href="/admin">Dashboard</a>
+    </div>
+  </div>
+</aside>
+<% } %>

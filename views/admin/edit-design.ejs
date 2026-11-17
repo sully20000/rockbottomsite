@@ -1,0 +1,113 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">Appearance</p>
+    <h2>Colours and navigation</h2>
+    <p>The palette is deliberately calm but open: fresh woodland green, soft sage, warm paper and a pale sunlight accent. Keep contrast strong and avoid anything harsh or clinical.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview draft</a>
+</div>
+
+<form method="post" action="/admin/edit/design" class="admin-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Palette</p><h2>Website colours</h2></div>
+    </div>
+
+    <div class="palette-preview" aria-hidden="true">
+      <span style="background: <%= draft.theme.background %>" title="Background"></span>
+      <span style="background: <%= draft.theme.surface %>" title="Surface"></span>
+      <span style="background: <%= draft.theme.surfaceSoft %>" title="Soft surface"></span>
+      <span style="background: <%= draft.theme.ink %>" title="Main text"></span>
+      <span style="background: <%= draft.theme.muted %>" title="Muted text"></span>
+      <span style="background: <%= draft.theme.accent %>" title="Accent"></span>
+      <span style="background: <%= draft.theme.sage %>" title="Sage"></span>
+      <span style="background: <%= draft.theme.paper %>" title="Warm paper"></span>
+    </div>
+
+    <div class="admin-form-grid admin-colour-grid">
+      <label class="field">
+        <span>Page background</span>
+        <div class="colour-field"><input type="color" name="theme[background]" value="<%= draft.theme.background %>"><span><%= draft.theme.background %></span></div>
+      </label>
+      <label class="field">
+        <span>Card surface</span>
+        <div class="colour-field"><input type="color" name="theme[surface]" value="<%= draft.theme.surface %>"><span><%= draft.theme.surface %></span></div>
+      </label>
+      <label class="field">
+        <span>Soft surface</span>
+        <div class="colour-field"><input type="color" name="theme[surfaceSoft]" value="<%= draft.theme.surfaceSoft %>"><span><%= draft.theme.surfaceSoft %></span></div>
+      </label>
+      <label class="field">
+        <span>Main text</span>
+        <div class="colour-field"><input type="color" name="theme[ink]" value="<%= draft.theme.ink %>"><span><%= draft.theme.ink %></span></div>
+      </label>
+      <label class="field">
+        <span>Muted text</span>
+        <div class="colour-field"><input type="color" name="theme[muted]" value="<%= draft.theme.muted %>"><span><%= draft.theme.muted %></span></div>
+      </label>
+      <label class="field">
+        <span>Warm accent</span>
+        <div class="colour-field"><input type="color" name="theme[accent]" value="<%= draft.theme.accent %>"><span><%= draft.theme.accent %></span></div>
+      </label>
+      <label class="field">
+        <span>Sage green</span>
+        <div class="colour-field"><input type="color" name="theme[sage]" value="<%= draft.theme.sage %>"><span><%= draft.theme.sage %></span></div>
+      </label>
+      <label class="field">
+        <span>Decorative glow</span>
+        <div class="colour-field"><input type="color" name="theme[glow]" value="<%= draft.theme.glow %>"><span><%= draft.theme.glow %></span></div>
+      </label>
+      <label class="field">
+        <span>Warm paper sections</span>
+        <div class="colour-field"><input type="color" name="theme[paper]" value="<%= draft.theme.paper %>"><span><%= draft.theme.paper %></span></div>
+      </label>
+      <label class="field">
+        <span>Text on warm paper</span>
+        <div class="colour-field"><input type="color" name="theme[paperInk]" value="<%= draft.theme.paperInk %>"><span><%= draft.theme.paperInk %></span></div>
+      </label>
+    </div>
+
+    <div class="admin-tip">
+      <span><%- icon('info') %></span>
+      <p><strong>Contrast matters.</strong> Text should remain easy to read for people with low vision, tired eyes or a phone screen in bright light. If you are unsure, keep the default palette.</p>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Labels</p><h2>Navigation</h2></div>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Ten steps link</span>
+        <input type="text" name="nav[stepsLabel]" value="<%= draft.nav.stepsLabel %>" maxlength="60">
+      </label>
+      <label class="field">
+        <span>Support link</span>
+        <input type="text" name="nav[supportLabel]" value="<%= draft.nav.supportLabel %>" maxlength="60">
+      </label>
+      <label class="field">
+        <span>Emergency link</span>
+        <input type="text" name="nav[emergencyLabel]" value="<%= draft.nav.emergencyLabel %>" maxlength="60">
+      </label>
+      <label class="field">
+        <span>“Where to start” label</span>
+        <input type="text" name="nav[startLabel]" value="<%= draft.nav.startLabel %>" maxlength="80">
+      </label>
+    </div>
+  </section>
+
+  <div class="admin-save-bar">
+    <div><strong>Save to draft</strong><span>Preview the whole site after changing colours.</span></div>
+    <div class="admin-save-actions">
+      <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview</a>
+      <button class="admin-button admin-button-primary" type="submit">Save draft <%- icon('check') %></button>
+    </div>
+  </div>
+</form>
+
+<%- include('../partials/admin-foot') %>

@@ -1,0 +1,25 @@
+{
+  "name": "rock-bottom-the-way-back",
+  "version": "1.0.0",
+  "description": "Rock Bottom – The Way Back. A calm, hopeful mental health support website with a secure content management dashboard.",
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "create-admin": "node scripts/create-admin.js",
+    "backup": "node scripts/backup.js",
+    "build:html": "node scripts/build-standalone.js"
+  },
+  "dependencies": {
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2"
+  }
+}

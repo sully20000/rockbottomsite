@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= pageTitle %> · Admin · Rock Bottom – The Way Back</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b2429">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+  <%- include('icons') %>
+  <div class="admin-shell">
+    <%- include('admin-sidebar', { active, hasChanges }) %>
+    <div class="admin-main">
+      <%- include('admin-topbar', { pageTitle, hasChanges }) %>
+      <main class="admin-content" id="main">
+        <% if (notice) { %>
+          <div class="admin-notice admin-notice-success" role="status">
+            <%- icon('check') %>
+            <span><%= notice %></span>
+          </div>
+        <% } %>
+        <% if (typeof error !== 'undefined' && error) { %>
+          <div class="admin-notice admin-notice-error" role="alert">
+            <%- icon('warning') %>
+            <span><%= error %></span>
+          </div>
+        <% } %>

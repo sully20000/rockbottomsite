@@ -1,0 +1,141 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">The most important section</p>
+    <h2>Ten things that helped me</h2>
+    <p>Write like you are talking to one person who is having the worst day of their life. Short paragraphs, no clinical language.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview draft</a>
+</div>
+
+<form method="post" action="/admin/edit/tips" class="admin-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="eyebrow" value="<%= draft.tips.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading</span>
+        <input type="text" name="heading" value="<%= draft.tips.heading %>" maxlength="180">
+      </label>
+      <label class="field field-full">
+        <span>Subtitle</span>
+        <textarea name="subtitle" rows="3" maxlength="900"><%= draft.tips.subtitle %></textarea>
+      </label>
+      <%- include('../partials/admin-image-field', {
+        id: 'tips-image',
+        name: 'image',
+        label: 'Side image',
+        value: draft.tips.image,
+        hint: 'A peaceful walking trail or nature scene works beautifully here.'
+      }) %>
+      <label class="field field-full">
+        <span>Image description for screen readers</span>
+        <input type="text" name="imageAlt" value="<%= draft.tips.imageAlt %>" maxlength="240">
+      </label>
+      <label class="field">
+        <span>Closing heading</span>
+        <input type="text" name="closingHeading" value="<%= draft.tips.closingHeading %>" maxlength="160">
+      </label>
+      <label class="field">
+        <span>Closing text</span>
+        <input type="text" name="closingText" value="<%= draft.tips.closingText %>" maxlength="500">
+      </label>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Cards</p><h2>The steps themselves</h2></div>
+      <button class="admin-button admin-button-ghost" type="button" data-add-row="tip-rows" data-template="tip-row-template">
+        <%- icon('plus') %> Add a step
+      </button>
+    </div>
+
+    <div class="admin-repeater" id="tip-rows">
+      <% draft.tips.items.forEach(function(tip, index) { %>
+        <fieldset class="admin-repeater-row admin-repeater-row-large" data-repeater-row data-index="<%= index %>">
+          <legend><span data-row-number><%= index + 1 %></span> · <%= tip.title %></legend>
+          <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this step"><%- icon('trash') %></button>
+          <div class="admin-form-grid admin-form-grid-compact">
+            <label class="field">
+              <span>Icon</span>
+              <select name="items[<%= index %>][icon]">
+                <% ICON_NAMES.forEach(function(iconName) { %>
+                  <option value="<%= iconName %>" <%= tip.icon === iconName ? 'selected' : '' %>><%= ICON_LABELS[iconName] || iconName %></option>
+                <% }) %>
+              </select>
+            </label>
+            <label class="field">
+              <span>Title</span>
+              <input type="text" name="items[<%= index %>][title]" value="<%= tip.title %>" maxlength="140" required>
+            </label>
+            <label class="field field-full">
+              <span>Short teaser (shown when closed)</span>
+              <input type="text" name="items[<%= index %>][summary]" value="<%= tip.summary %>" maxlength="220">
+            </label>
+            <label class="field field-full">
+              <span>Full text</span>
+              <textarea name="items[<%= index %>][body]" rows="7" required><%= tip.body.join('\n') %></textarea>
+              <small>One paragraph per line. The public page will space them out.</small>
+            </label>
+            <label class="field field-full">
+              <span>Important note (optional)</span>
+              <textarea name="items[<%= index %>][note]" rows="2" maxlength="500"><%= tip.note || '' %></textarea>
+              <small>Use for safety notes, such as speaking to a GP before stopping medication.</small>
+            </label>
+          </div>
+        </fieldset>
+      <% }) %>
+    </div>
+
+    <template id="tip-row-template">
+      <fieldset class="admin-repeater-row admin-repeater-row-large" data-repeater-row data-index="__INDEX__">
+        <legend><span data-row-number>New</span> · New step</legend>
+        <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this step"><%- icon('trash') %></button>
+        <div class="admin-form-grid admin-form-grid-compact">
+          <label class="field">
+            <span>Icon</span>
+            <select name="items[__INDEX__][icon]">
+              <% ICON_NAMES.forEach(function(iconName) { %>
+                <option value="<%= iconName %>"><%= ICON_LABELS[iconName] || iconName %></option>
+              <% }) %>
+            </select>
+          </label>
+          <label class="field">
+            <span>Title</span>
+            <input type="text" name="items[__INDEX__][title]" maxlength="140" required>
+          </label>
+          <label class="field field-full">
+            <span>Short teaser</span>
+            <input type="text" name="items[__INDEX__][summary]" maxlength="220">
+          </label>
+          <label class="field field-full">
+            <span>Full text</span>
+            <textarea name="items[__INDEX__][body]" rows="7" required></textarea>
+          </label>
+          <label class="field field-full">
+            <span>Important note (optional)</span>
+            <textarea name="items[__INDEX__][note]" rows="2" maxlength="500"></textarea>
+          </label>
+        </div>
+      </fieldset>
+    </template>
+  </section>
+
+  <%- include('../partials/admin-image-options') %>
+
+  <div class="admin-save-bar">
+    <div><strong>Save to draft</strong><span>Preview these changes before publishing.</span></div>
+    <div class="admin-save-actions">
+      <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview</a>
+      <button class="admin-button admin-button-primary" type="submit">Save draft <%- icon('check') %></button>
+    </div>
+  </div>
+</form>
+
+<%- include('../partials/admin-foot') %>

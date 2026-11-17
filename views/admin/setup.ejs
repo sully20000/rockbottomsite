@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Set up administrator · Rock Bottom – The Way Back</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b2429">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="auth-body">
+  <%- include('../partials/icons') %>
+  <div class="auth-shell">
+    <section class="auth-visual" aria-label="Rock Bottom – The Way Back">
+      <img src="/images/hero-forest.jpg" alt="A quiet forest lake at first light" class="auth-visual-image">
+      <div class="auth-visual-overlay" aria-hidden="true"></div>
+      <a class="auth-brand" href="/">
+        <span class="admin-brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" focusable="false">
+            <path d="M8 33V19a12 12 0 0 1 24 0v14" />
+            <circle cx="20" cy="19" r="3.6" fill="currentColor" />
+            <path d="M20 8v3" />
+            <path d="M10.4 11.4l2.1 2.1" />
+            <path d="M29.6 11.4l-2.1 2.1" />
+            <path d="M4 19h3" />
+            <path d="M33 19h3" />
+            <path d="M13 33h14" />
+            <path d="M16 37h8" />
+          </svg>
+        </span>
+        <span><strong>Rock Bottom</strong><small>The Way Back</small></span>
+      </a>
+      <div class="auth-quote">
+        <p>“One step at a time. One day at a time. There is a way back.”</p>
+        <span>First-time setup</span>
+      </div>
+      <p class="auth-visual-note">Create one administrator account, then keep its password safe. There is no public sign-up.</p>
+    </section>
+
+    <section class="auth-panel">
+      <div class="auth-form-wrap auth-form-wrap-wide">
+        <a class="auth-back" href="/"><%- icon('arrow-right') %> Back to the website</a>
+        <p class="admin-kicker"><%- icon('lock') %> First-time setup</p>
+        <h1>Create your administrator account</h1>
+        <p class="auth-intro">This page only works once. The setup token is printed in the server console and saved in <code>data/setup-token.txt</code>.</p>
+
+        <% if (error) { %>
+          <div class="admin-notice admin-notice-error" role="alert"><%- icon('warning') %><span><%= error %></span></div>
+        <% } %>
+
+        <form method="post" action="/admin/setup" class="auth-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label class="field">
+            <span>Setup token</span>
+            <input type="text" name="setupToken" value="<%= token %>" required autocomplete="off" spellcheck="false">
+            <small>Find this in the server console or the file above.</small>
+          </label>
+          <label class="field">
+            <span>Username</span>
+            <input type="text" name="username" required minlength="3" maxlength="40" autocomplete="username" spellcheck="false" placeholder="e.g. admin">
+            <small>Letters, numbers, dots, dashes or underscores.</small>
+          </label>
+          <div class="field-pair">
+            <label class="field">
+              <span>Password</span>
+              <input type="password" name="password" required minlength="12" autocomplete="new-password">
+              <small>At least 12 characters.</small>
+            </label>
+            <label class="field">
+              <span>Confirm password</span>
+              <input type="password" name="confirmPassword" required minlength="12" autocomplete="new-password">
+            </label>
+          </div>
+          <button class="admin-button admin-button-primary admin-button-wide" type="submit">
+            Create account <%- icon('arrow-right') %>
+          </button>
+        </form>
+
+        <p class="auth-small"><%- icon('shield') %> The token can only be used once. Choose a long, unique password and store it in a password manager.</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">A small daily kindness</p>
+    <h2>Daily encouragement messages</h2>
+    <p>One message is chosen automatically each day. Keep them gentle, specific and believable — not forced positivity.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview draft</a>
+</div>
+
+<form method="post" action="/admin/edit/daily" class="admin-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="eyebrow" value="<%= draft.daily.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading above the quote</span>
+        <input type="text" name="heading" value="<%= draft.daily.heading %>" maxlength="160">
+      </label>
+      <label class="field field-full">
+        <span>Small note</span>
+        <input type="text" name="note" value="<%= draft.daily.note %>" maxlength="160">
+      </label>
+      <%- include('../partials/admin-image-field', {
+        id: 'daily-image',
+        name: 'image',
+        label: 'Background image',
+        value: draft.daily.image,
+        hint: 'A still landscape with some dark space at the bottom works well behind the quote.'
+      }) %>
+      <label class="field field-full">
+        <span>Image description for screen readers</span>
+        <input type="text" name="imageAlt" value="<%= draft.daily.imageAlt %>" maxlength="240">
+      </label>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">The rotation</p>
+        <h2>Messages</h2>
+        <p class="admin-card-sub">One message per line. Currently <strong data-line-count-for="daily-messages"><%= draft.daily.messages.length %></strong> messages. Adding 30–50 gives the rotation a lovely, fresh feeling.</p>
+      </div>
+    </div>
+    <label class="field">
+      <span class="visually-hidden">Daily messages</span>
+      <textarea id="daily-messages" name="messages" rows="22" data-count-lines><%= draft.daily.messages.join('\n') %></textarea>
+      <small>Each new line becomes one message. Empty lines are ignored.</small>
+    </label>
+    <div class="admin-tip">
+      <span><%- icon('sparkles') %></span>
+      <p><strong>Examples that work:</strong> “Slow is still forward.” · “A bad day is not a failed life.” · “You don’t have to explain yourself perfectly to deserve support.”</p>
+    </div>
+  </section>
+
+  <%- include('../partials/admin-image-options') %>
+
+  <div class="admin-save-bar">
+    <div><strong>Save to draft</strong><span>One message will appear per day on the homepage.</span></div>
+    <div class="admin-save-actions">
+      <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview</a>
+      <button class="admin-button admin-button-primary" type="submit">Save draft <%- icon('check') %></button>
+    </div>
+  </div>
+</form>
+
+<%- include('../partials/admin-foot') %>

@@ -1,0 +1,118 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">Diagnostics</p>
+    <h2>System information</h2>
+    <p>Useful facts about the server and its stored data. Nothing here is visible to public visitors.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin"><%- icon('chart') %> Back to overview</a>
+</div>
+
+<% if (!isProduction) { %>
+  <div class="admin-notice admin-notice-warning" role="status">
+    <%- icon('warning') %>
+    <span><strong>Development mode.</strong> Before launch, run behind HTTPS with <code>NODE_ENV=production</code> and <code>TRUST_PROXY=1</code>.</span>
+  </div>
+<% } else { %>
+  <div class="admin-notice admin-notice-success" role="status">
+    <%- icon('check') %>
+    <span><strong>Production mode is active.</strong> Confirm HTTPS is working and that the data folder is included in backups.</span>
+  </div>
+<% } %>
+
+<div class="admin-overview-grid">
+  <section class="admin-card">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Server</p>
+        <h2>Runtime</h2>
+      </div>
+      <span class="admin-status-pill"><%- icon('settings') %> <%= environment %></span>
+    </div>
+    <dl class="admin-detail-list">
+      <div><dt>Node.js</dt><dd><%= nodeVersion %></dd></div>
+      <div><dt>Platform</dt><dd><%= platform %></dd></div>
+      <div><dt>Uptime</dt><dd><%= Math.floor(uptime / 3600) %>h <%= Math.floor((uptime % 3600) / 60) %>m</dd></div>
+      <div><dt>Memory in use</dt><dd><%= memoryUsed %></dd></div>
+      <div><dt>Environment</dt><dd><%= environment %></dd></div>
+    </dl>
+  </section>
+
+  <section class="admin-card">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Storage</p>
+        <h2>Your content and files</h2>
+      </div>
+    </div>
+    <dl class="admin-detail-list">
+      <div><dt>Database file</dt><dd class="is-path"><%= dbPath %></dd></div>
+      <div><dt>Database size</dt><dd><%= databaseSize %></dd></div>
+      <div><dt>Uploads folder</dt><dd class="is-path"><%= uploadDir %></dd></div>
+      <div><dt>Uploaded images</dt><dd><%= mediaCount %> · <%= uploadsSize %></dd></div>
+      <div><dt>Data folder</dt><dd class="is-path"><%= dataDir %></dd></div>
+    </dl>
+    <p class="admin-field-note">Back up both the database file and the uploads folder. The content will survive a restart, but it will not survive deleting these folders.</p>
+  </section>
+</div>
+
+<div class="admin-overview-grid">
+  <section class="admin-card">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Publishing</p>
+        <h2>Content status</h2>
+      </div>
+    </div>
+    <dl class="admin-detail-list">
+      <div><dt>Last edited</dt><dd><%= contentMeta.updated_at ? formatDate(contentMeta.updated_at, { hour: '2-digit', minute: '2-digit' }) : '—' %></dd></div>
+      <div><dt>Last published</dt><dd><%= contentMeta.published_at ? formatDate(contentMeta.published_at, { hour: '2-digit', minute: '2-digit' }) : '—' %></dd></div>
+      <div><dt>Unpublished changes</dt><dd><%= hasChanges ? 'Yes — preview and publish when ready' : 'No — the live site matches the draft' %></dd></div>
+    </dl>
+    <div class="admin-publish-actions">
+      <a class="admin-button admin-button-ghost" href="/admin/preview" target="_blank" rel="noopener"><%- icon('eye') %> Preview draft</a>
+      <% if (hasChanges) { %>
+        <form method="post" action="/admin/publish">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="admin-button admin-button-primary" type="submit">Publish changes <%- icon('upload') %></button>
+        </form>
+      <% } %>
+    </div>
+  </section>
+
+  <aside class="admin-card">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Backups</p>
+        <h2>Keep a spare copy</h2>
+      </div>
+    </div>
+    <p class="admin-muted">Run this from the project folder to copy the database and uploaded images into a timestamped backup folder:</p>
+    <pre class="admin-code"><code>npm run backup</code></pre>
+    <p class="admin-muted">Keep backups somewhere separate from the server. Test that you can restore one before you need it.</p>
+    <div class="admin-tip">
+      <span><%- icon('info') %></span>
+      <p><strong>Support details change.</strong> Re-check every phone number, opening time and website at least every few months, then update the “details checked” date.</p>
+    </div>
+  </aside>
+</div>
+
+<section class="admin-card">
+  <div class="admin-card-head">
+    <div>
+      <p class="admin-kicker">Before launch</p>
+      <h2>A short checklist</h2>
+    </div>
+  </div>
+  <div class="admin-checklist">
+    <div><span><%- icon('check') %></span><p><strong>HTTPS is working.</strong> The administrator password and session cookie must never travel over plain HTTP.</p></div>
+    <div><span><%- icon('check') %></span><p><strong>The setup token has been removed.</strong> After creating your account, <code>data/setup-token.txt</code> is deleted automatically.</p></div>
+    <div><span><%- icon('check') %></span><p><strong>Backups are scheduled.</strong> Protect <code>data/</code> and <code>uploads/</code>, and store copies off the server.</p></div>
+    <div><span><%- icon('check') %></span><p><strong>Support details are current.</strong> Check all five organisations against their official websites.</p></div>
+    <div><span><%- icon('check') %></span><p><strong>The disclaimer and privacy page are accurate.</strong> Read them as a visitor would.</p></div>
+    <div><span><%- icon('check') %></span><p><strong>The public homepage has been tried on a phone.</strong> Check the call buttons, the menu and the “where to start” dialog.</p></div>
+  </div>
+</section>
+
+<%- include('../partials/admin-foot') %>

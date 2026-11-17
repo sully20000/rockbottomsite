@@ -1,0 +1,126 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">Anonymous analytics</p>
+    <h2>Visitor statistics</h2>
+    <p>A simple count of how many people reach the website. No personal information is collected, stored or shared.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/" target="_blank" rel="noopener"><%- icon('external') %> View live site</a>
+</div>
+
+<section class="admin-stat-grid" aria-label="Visitor totals">
+  <article class="admin-stat-card">
+    <span class="admin-stat-icon"><%- icon('users') %></span>
+    <p>People who have visited</p>
+    <strong><%= formatNumber(stats.totalVisitors) %></strong>
+    <small>Unique anonymous devices</small>
+  </article>
+  <article class="admin-stat-card">
+    <span class="admin-stat-icon"><%- icon('eye') %></span>
+    <p>Total page views</p>
+    <strong><%= formatNumber(stats.totalViews) %></strong>
+    <small>Every public page loaded</small>
+  </article>
+  <article class="admin-stat-card">
+    <span class="admin-stat-icon"><%- icon('sun') %></span>
+    <p>Views today</p>
+    <strong><%= formatNumber(stats.today) %></strong>
+    <small><%= formatNumber(stats.visitorsToday) %> new visitor<%= stats.visitorsToday === 1 ? '' : 's' %> today</small>
+  </article>
+  <article class="admin-stat-card">
+    <span class="admin-stat-icon"><%- icon('chart') %></span>
+    <p>Views in the last 7 days</p>
+    <strong><%= formatNumber(stats.last7) %></strong>
+    <small>Yesterday excluded from daily totals</small>
+  </article>
+</section>
+
+<section class="admin-card">
+  <div class="admin-card-head">
+    <div>
+      <p class="admin-kicker">Last 14 days</p>
+      <h2>Page views over time</h2>
+    </div>
+    <span class="admin-status-pill"><%- icon('clock') %> Live database</span>
+  </div>
+
+  <% if (stats.daily.length) { %>
+    <div class="admin-chart admin-chart-large" role="img" aria-label="Bar chart of page views over the last 14 days">
+      <% stats.daily.forEach(function(day) { %>
+        <div class="admin-chart-bar" title="<%= day.day %>: <%= day.views %> views, <%= day.visitors %> visitors" tabindex="0">
+          <span class="admin-chart-value"><%= day.views %></span>
+          <span class="admin-chart-fill" style="height: <%= Math.max(4, Math.round((day.views / maxViews) * 100)) %>%"></span>
+          <span class="admin-chart-label"><%= day.day.slice(8) %></span>
+        </div>
+      <% }) %>
+    </div>
+    <div class="admin-chart-legend">
+      <span>Each bar is one day of the last two weeks.</span>
+      <span><strong><%= formatNumber(stats.totalViews) %></strong> page views recorded in total</span>
+    </div>
+
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <caption class="visually-hidden">Daily visitor statistics</caption>
+        <thead>
+          <tr><th scope="col">Day</th><th scope="col">Page views</th><th scope="col">Visitors</th></tr>
+        </thead>
+        <tbody>
+          <% stats.daily.slice().reverse().forEach(function(day) { %>
+            <tr>
+              <td><%= formatDate(day.day, { weekday: 'short' }) %></td>
+              <td><%= formatNumber(day.views) %></td>
+              <td><%= formatNumber(day.visitors) %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <div class="admin-empty">
+      <span><%- icon('chart') %></span>
+      <h3>No visits recorded yet</h3>
+      <p>When someone opens the public website, an anonymous visit will appear here. Refreshing the same device will add page views but will not inflate the visitor total.</p>
+    </div>
+  <% } %>
+</section>
+
+<div class="admin-overview-grid">
+  <section class="admin-card">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Most viewed</p>
+        <h2>Popular pages</h2>
+      </div>
+    </div>
+    <% if (stats.topPages.length) { %>
+      <ul class="admin-bar-list admin-bar-list-large">
+        <% const topMax = Math.max(1, ...stats.topPages.map((page) => page.views)); %>
+        <% stats.topPages.forEach(function(page) { %>
+          <li>
+            <div><span><%= page.path === '/' ? 'Homepage' : page.path %></span><strong><%= formatNumber(page.views) %></strong></div>
+            <span class="admin-bar-track"><span style="width: <%= Math.round((page.views / topMax) * 100) %>%"></span></span>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p class="admin-muted">Page view data will appear here after the first visits.</p>
+    <% } %>
+  </section>
+
+  <aside class="admin-card admin-privacy-card">
+    <span class="admin-stat-icon"><%- icon('shield') %></span>
+    <h2>What is counted</h2>
+    <p>Each device receives a random first-party cookie. We store only a one-way hash of that identifier, the page visited and the time. There is no name, email, IP address or location stored.</p>
+    <ul class="admin-check-list">
+      <li><%- icon('check') %> Refreshes add views, not new visitors</li>
+      <li><%- icon('check') %> Search engine bots are excluded</li>
+      <li><%- icon('check') %> No third-party analytics or advertising</li>
+      <li><%- icon('check') %> Figures remain after a restart</li>
+    </ul>
+    <p class="admin-field-note">The count is deliberately approximate. Someone using more than one device, or clearing cookies, may be counted more than once.</p>
+  </aside>
+</div>
+
+<%- include('../partials/admin-foot') %>

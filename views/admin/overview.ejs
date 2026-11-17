@@ -1,0 +1,175 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">A calm overview</p>
+    <h2>Hello, <%= admin?.username || 'administrator' %>.</h2>
+    <p>Here’s how the website is doing and what is waiting to be published.</p>
+  </div>
+  <div class="admin-page-heading-actions">
+    <a class="admin-button admin-button-ghost" href="/admin/edit/home">Edit homepage <%- icon('arrow-right') %></a>
+  </div>
+</div>
+
+<section class="admin-stat-grid" aria-label="Visitor statistics">
+  <article class="admin-stat-card">
+    <span class="admin-stat-icon"><%- icon('users') %></span>
+    <p>People who have visited</p>
+    <strong><%= formatNumber(stats.totalVisitors) %></strong>
+    <small>Unique devices, counted anonymously</small>
+  </article>
+  <article class="admin-stat-card">
+    <span class="admin-stat-icon"><%- icon('eye') %></span>
+    <p>Total page views</p>
+    <strong><%= formatNumber(stats.totalViews) %></strong>
+    <small>Across the public website</small>
+  </article>
+  <article class="admin-stat-card">
+    <span class="admin-stat-icon"><%- icon('sun') %></span>
+    <p>Views today</p>
+    <strong><%= formatNumber(stats.today) %></strong>
+    <small><%= formatNumber(stats.visitorsToday) %> new visitor<%= stats.visitorsToday === 1 ? '' : 's' %> today</small>
+  </article>
+  <article class="admin-stat-card">
+    <span class="admin-stat-icon"><%- icon('chart') %></span>
+    <p>Views in the last 7 days</p>
+    <strong><%= formatNumber(stats.last7) %></strong>
+    <small>A simple, privacy-friendly count</small>
+  </article>
+</section>
+
+<div class="admin-overview-grid">
+  <section class="admin-card">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Last 14 days</p>
+        <h2>Visits at a glance</h2>
+      </div>
+      <a class="admin-text-link" href="/admin/visitors">All statistics <%- icon('arrow-right') %></a>
+    </div>
+    <% if (stats.daily.length) { %>
+      <div class="admin-chart" role="img" aria-label="Bar chart of page views over the last 14 days">
+        <% stats.daily.forEach(function(day) { %>
+          <div class="admin-chart-bar" title="<%= day.day %>: <%= day.views %> views, <%= day.visitors %> visitors">
+            <span class="admin-chart-value"><%= day.views %></span>
+            <span class="admin-chart-fill" style="height: <%= Math.max(4, Math.round((day.views / maxViews) * 100)) %>%"></span>
+            <span class="admin-chart-label"><%= day.day.slice(8) %></span>
+          </div>
+        <% }) %>
+      </div>
+      <div class="admin-chart-legend">
+        <span>Each bar is one day. Hover or focus a bar to see its details.</span>
+        <span><strong><%= formatNumber(stats.totalVisitors) %></strong> unique visitors in total</span>
+      </div>
+    <% } else { %>
+      <div class="admin-empty">
+        <span><%- icon('chart') %></span>
+        <h3>No visits recorded yet</h3>
+        <p>Once someone visits the public website, their anonymous visit will appear here.</p>
+      </div>
+    <% } %>
+  </section>
+
+  <aside class="admin-card admin-publish-card">
+    <p class="admin-kicker">Publishing</p>
+    <% if (hasChanges) { %>
+      <h2>You have unpublished changes</h2>
+      <p>Preview your draft, then publish when you are happy with it. The public website will not change until you do.</p>
+      <div class="admin-publish-actions">
+        <a class="admin-button admin-button-primary" href="/admin/preview" target="_blank" rel="noopener">Preview draft <%- icon('eye') %></a>
+        <form method="post" action="/admin/publish">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="admin-button admin-button-dark" type="submit">Publish now <%- icon('upload') %></button>
+        </form>
+      </div>
+      <form method="post" action="/admin/discard" class="admin-discard-form" data-confirm="Reset the draft to the published version? Any unpublished edits will be lost.">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="admin-text-button" type="submit">Discard draft changes</button>
+      </form>
+    <% } else { %>
+      <div class="admin-published-state">
+        <span class="admin-published-icon"><%- icon('check') %></span>
+        <h2>Everything is published</h2>
+        <p>Your draft and the live website match. Last published <%= meta.published_at ? formatDate(meta.published_at) : 'at setup' %>.</p>
+      </div>
+      <a class="admin-button admin-button-ghost" href="/" target="_blank" rel="noopener">View live website <%- icon('external') %></a>
+    <% } %>
+    <div class="admin-meta-list">
+      <span><span>Last edited</span><strong><%= meta.updated_at ? formatDate(meta.updated_at, { hour: '2-digit', minute: '2-digit' }) : '—' %></strong></span>
+      <span><span>Last published</span><strong><%= meta.published_at ? formatDate(meta.published_at, { hour: '2-digit', minute: '2-digit' }) : '—' %></strong></span>
+    </div>
+  </aside>
+</div>
+
+<div class="admin-overview-grid admin-overview-lower">
+  <section class="admin-card">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Content</p>
+        <h2>Edit something specific</h2>
+      </div>
+    </div>
+    <div class="admin-quick-grid">
+      <a href="/admin/edit/home"><%- icon('home') %><span><strong>Homepage</strong><small>Hero, letter, disclaimer</small></span><%- icon('arrow-right') %></a>
+      <a href="/admin/edit/tips"><%- icon('footsteps') %><span><strong>Ten steps</strong><small>Add, remove or rewrite tips</small></span><%- icon('arrow-right') %></a>
+      <a href="/admin/edit/support"><%- icon('heart') %><span><strong>Support</strong><small>Numbers, hours, websites</small></span><%- icon('arrow-right') %></a>
+      <a href="/admin/edit/emergency"><%- icon('shield') %><span><strong>Emergency</strong><small>999, 111 and A&amp;E</small></span><%- icon('arrow-right') %></a>
+      <a href="/admin/edit/daily"><%- icon('sunrise') %><span><strong>Daily reminders</strong><small><%= draft.daily.messages.length %> messages in the rotation</small></span><%- icon('arrow-right') %></a>
+      <a href="/admin/edit/design"><%- icon('palette') %><span><strong>Design</strong><small>Colours and navigation</small></span><%- icon('arrow-right') %></a>
+    </div>
+  </section>
+
+  <section class="admin-card">
+    <div class="admin-card-head">
+      <div>
+        <p class="admin-kicker">Most viewed</p>
+        <h2>Popular pages</h2>
+      </div>
+    </div>
+    <% if (stats.topPages.length) { %>
+      <ul class="admin-bar-list">
+        <% const topMax = Math.max(1, ...stats.topPages.map((page) => page.views)); %>
+        <% stats.topPages.forEach(function(page) { %>
+          <li>
+            <div><span><%= page.path === '/' ? 'Homepage' : page.path %></span><strong><%= formatNumber(page.views) %></strong></div>
+            <span class="admin-bar-track"><span style="width: <%= Math.round((page.views / topMax) * 100) %>%"></span></span>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p class="admin-muted">Page view data will appear here after the first visits.</p>
+    <% } %>
+    <div class="admin-reminder">
+      <span><%- icon('info') %></span>
+      <p><strong>Support details change.</strong> Check the contact numbers and opening hours on each organisation’s official website every few months, then update them under <a href="/admin/edit/support">Support organisations</a>.</p>
+    </div>
+  </section>
+</div>
+
+<section class="admin-card">
+  <div class="admin-card-head">
+    <div>
+      <p class="admin-kicker">Media</p>
+      <h2>Recently uploaded images</h2>
+    </div>
+    <a class="admin-text-link" href="/admin/media">Open media library <%- icon('arrow-right') %></a>
+  </div>
+  <% if (media.length) { %>
+    <div class="admin-media-strip">
+      <% media.slice(0, 6).forEach(function(item) { %>
+        <a href="/admin/media" class="admin-media-strip-item">
+          <img src="/uploads/<%= item.filename %>" alt="<%= item.original_name %>" loading="lazy">
+          <span><%= item.original_name %></span>
+        </a>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="admin-empty admin-empty-inline">
+      <span><%- icon('image') %></span>
+      <div><h3>No uploads yet</h3><p>You can upload your own nature photography from the media library.</p></div>
+      <a class="admin-button admin-button-ghost" href="/admin/media">Upload an image</a>
+    </div>
+  <% } %>
+</section>
+
+<%- include('../partials/admin-foot') %>
