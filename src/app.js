@@ -67,6 +67,26 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 app.use(express.json({ limit: '512kb' }));
 
+const canonicalBase = (() => {
+  try {
+    return process.env.BASE_URL ? new URL(process.env.BASE_URL) : null;
+  } catch {
+    return null;
+  }
+})();
+
+// Keep search engines and visitors on the canonical domain. Railway's
+// generated *.up.railway.app address should never compete with the real site.
+app.use((req, res, next) => {
+  if (!canonicalBase) return next();
+  const host = req.hostname;
+  if (host === canonicalBase.hostname) return next();
+  if (host === `www.${canonicalBase.hostname}` || host.endsWith('.up.railway.app')) {
+    return res.redirect(301, `${canonicalBase.origin}${req.originalUrl}`);
+  }
+  next();
+});
+
 app.use(
   '/uploads',
   express.static(uploadDir, {
