@@ -19,6 +19,7 @@ const EDITABLE_ROOTS = new Set([
   'support',
   'emergency',
   'community',
+  'donation',
   'closing',
   'footer',
   'pages',

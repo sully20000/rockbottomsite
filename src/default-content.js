@@ -500,6 +500,16 @@ export const defaultContent = {
     imageAlt: 'A single broad tree standing in a sunlit field beneath a wide open sky',
   },
 
+  donation: {
+    eyebrow: 'Optional support',
+    heading: 'Help keep this website running',
+    text:
+      'This website is free to use, and it always will be. If you would like to help with hosting and running costs, you can buy me a coffee on Ko-fi. It is completely optional.',
+    buttonLabel: 'Support the site on Ko-fi',
+    url: 'https://ko-fi.com/rockbottomthewayback',
+    note: 'Opens Ko-fi in a new tab. Donations are optional and do not unlock any content.',
+  },
+
   visitor: {
     label: 'People who have visited this page',
     note: 'Counted anonymously, once per device.',

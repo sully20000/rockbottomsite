@@ -2919,6 +2919,88 @@ body.is-inline-editing .section-paper [data-edit]:focus {
   }
 }
 
+/* ---------- Optional donation ---------- */
+
+.donation-section {
+  padding-top: clamp(58px, 8vw, 96px);
+  padding-bottom: clamp(58px, 8vw, 96px);
+}
+.donation-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(22px, 4vw, 42px);
+  padding: clamp(24px, 4vw, 38px);
+  border: 1px solid rgba(23, 61, 51, 0.13);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 8% 18%, rgba(255, 216, 143, 0.28), transparent 34%),
+    rgba(255, 255, 255, 0.58);
+  box-shadow: 0 24px 60px rgba(23, 61, 51, 0.08);
+}
+.donation-mark {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(37, 99, 83, 0.1);
+  color: #2f6a4f;
+}
+.donation-mark .icon {
+  width: 24px;
+  height: 24px;
+}
+.donation-copy h2 {
+  margin: 14px 0 10px;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.035em;
+}
+.donation-copy > p:last-child {
+  max-width: 610px;
+  color: rgba(23, 61, 51, 0.74);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.donation-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 11px;
+  max-width: 290px;
+}
+.donation-action .btn {
+  white-space: nowrap;
+}
+.donation-note {
+  color: rgba(23, 61, 51, 0.66);
+  font-size: 10.5px;
+  line-height: 1.55;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .donation-card {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .donation-mark {
+    width: 48px;
+    height: 48px;
+  }
+  .donation-action {
+    align-items: flex-start;
+    max-width: none;
+    width: 100%;
+  }
+  .donation-action .btn {
+    width: 100%;
+  }
+  .donation-note {
+    text-align: left;
+  }
+}
+
 
     /* Standalone copy: the feedback form needs the server. */
     .helpful-card {
@@ -3173,7 +3255,7 @@ body.is-inline-editing .section-paper [data-edit]:focus {
     </nav>
 
     <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" data-nav-toggle>
-      <span class="nav-toggle-label">Menu</span>
+      <span class="nav-toggle-label">MENU</span>
       <svg class="icon icon-menu" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
       <svg class="icon icon-close" aria-hidden="true" focusable="false"><use href="#i-close"></use></svg>
     </button>
@@ -3210,7 +3292,7 @@ body.is-inline-editing .section-paper [data-edit]:focus {
             <em>The Way Back</em>
           
         </h1>
-        <p class="hero-intro reveal">Sometimes life takes us somewhere we never expected to be. Your mind is racing, your body won’t settle, and even the simplest things can feel overwhelming.</p>
+        <p class="hero-intro reveal">Sometimes life takes us somewhere we never expected to be. Your mind is racing, your body won’t settle, and even the simplest things can feel overwhelming, you feel like what your going through will NEVER pass - I&#39;ve been there, and I&#39;m here to help you in your hour of need.</p>
         <div class="hero-actions reveal">
           <a class="btn btn-primary" href="#about">
             <span>Start your way back</span>
@@ -3255,7 +3337,7 @@ body.is-inline-editing .section-paper [data-edit]:focus {
         <h2 id="letter-title">I’ve been where you are.</h2>
         <div class="letter-body">
           
-            <p class="letter-lead">I’ve been there. I know how frightening, lonely and exhausting it can feel.</p>
+            <p class="letter-lead">I’ve been there. I know how frightening, lonely and exhausting it can feel. Right now it feels like the end of the world, but we can get through this together.</p>
           
             <p class="">I created this website to share some of the things that helped me find my way back.</p>
           
@@ -3279,7 +3361,7 @@ body.is-inline-editing .section-paper [data-edit]:focus {
           <p class="daily-kicker"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-sunrise"></use></svg> <span>A reminder for today</span></p>
           <h2 id="daily-title" class="daily-heading">One gentle thought to carry with you</h2>
           <blockquote class="daily-quote">
-            <p>“<span>You don’t need to fix everything today. One small thing is enough.</span>”</p>
+            <p>“<span>It’s okay if today is a survive day, not a thrive day.</span>”</p>
           </blockquote>
           <p class="daily-note">A different reminder appears each day.</p>
         </div>
@@ -3383,7 +3465,7 @@ body.is-inline-editing .section-paper [data-edit]:focus {
     <div class="container">
       <div class="helper-head reveal">
         <div>
-          <p class="eyebrow eyebrow-light"><span class="eyebrow-line" aria-hidden="true"></span><span>No plan needed</span></p>
+          <p class="eyebrow eyebrow-light"><span class="eyebrow-line" aria-hidden="true"></span><span>NO PLAN NEEDED</span></p>
           <h2 id="start-helper-title">I don’t know where to start</h2>
           <p class="section-sub">That’s okay. You don’t need to have the words, the answers or a plan. Choose whichever of these feels most possible right now.</p>
         </div>
@@ -3683,7 +3765,7 @@ body.is-inline-editing .section-paper [data-edit]:focus {
                 
                   <p>You don’t need to hold everything together all the time.</p>
                 
-                  <p>If you need to cry, cry. If you need to talk, talk.</p>
+                  <p>If you need to cry, cry. If you need to talk, talk. If you feel a build up and struggle to release it, try watching or listening to some emotional stories on youtube - It does the trick for me</p>
                 
                   <p>There is no weakness in showing emotion.</p>
                 
@@ -3747,7 +3829,7 @@ body.is-inline-editing .section-paper [data-edit]:focus {
         </div>
         <div class="helpful-action">
           <form method="post" action="/helpful" class="helpful-form" data-helpful-form data-voted-label="Counted — thank you">
-            <input type="hidden" name="_csrf" value="ea4go2JKt1c-46JPllwCNyLN-4PU7vd-">
+            <input type="hidden" name="_csrf" value="UvDq-G6D54dUHNabnO_kMgUaZ0s8bJ39">
             <button class="helpful-button" type="submit" data-helpful-button >
               <span class="helpful-button-icon" aria-hidden="true"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-thumbs-up"></use></svg></span>
               <span data-helpful-button-label>This helped me</span>
@@ -4009,6 +4091,26 @@ body.is-inline-editing .section-paper [data-edit]:focus {
     </div>
   </section>
 
+  <section class="section section-paper donation-section" id="donate" aria-labelledby="donation-title">
+    <div class="container">
+      <div class="donation-card reveal">
+        <span class="donation-mark" aria-hidden="true"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-coffee"></use></svg></span>
+        <div class="donation-copy">
+          <p class="eyebrow eyebrow-dark"><span class="eyebrow-line" aria-hidden="true"></span><span>Optional support</span></p>
+          <h2 id="donation-title">Help keep this website running</h2>
+          <p>This website is free to use, and it always will be. If you would like to help with hosting and running costs, you can buy me a coffee on Ko-fi. It is completely optional.</p>
+        </div>
+        <div class="donation-action">
+          <a class="btn btn-primary" href="https://ko-fi.com/rockbottomthewayback" target="_blank" rel="noopener noreferrer">
+            <span>Support the site on Ko-fi</span>
+            <svg class="icon " aria-hidden="true" focusable="false"><use href="#i-external"></use></svg>
+          </a>
+          <p class="donation-note">Opens Ko-fi in a new tab. Donations are optional and do not unlock any content.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="closing-section" aria-labelledby="closing-title">
     <div class="container closing-inner reveal">
       <p class="eyebrow eyebrow-light"><span class="eyebrow-line" aria-hidden="true"></span><span>One last thing</span></p>
@@ -4180,7 +4282,7 @@ body.is-inline-editing .section-paper [data-edit]:focus {
         <svg class="icon " aria-hidden="true" focusable="false"><use href="#i-close"></use></svg>
       </button>
     </form>
-    <p class="eyebrow eyebrow-dark"><span class="eyebrow-line" aria-hidden="true"></span><span>No plan needed</span></p>
+    <p class="eyebrow eyebrow-dark"><span class="eyebrow-line" aria-hidden="true"></span><span>NO PLAN NEEDED</span></p>
     <h2 id="helper-dialog-title">I don’t know where to start</h2>
     <p class="dialog-intro">That’s okay. You don’t need to have the words, the answers or a plan. Choose whichever of these feels most possible right now.</p>
     <div class="dialog-options">

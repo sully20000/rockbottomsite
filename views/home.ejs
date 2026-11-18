@@ -328,6 +328,26 @@
     </div>
   </section>
 
+  <section class="section section-paper donation-section" id="donate" aria-labelledby="donation-title">
+    <div class="container">
+      <div class="donation-card reveal">
+        <span class="donation-mark" aria-hidden="true"><%- icon('coffee') %></span>
+        <div class="donation-copy">
+          <p class="eyebrow eyebrow-dark"><span class="eyebrow-line" aria-hidden="true"></span><span<%- editAttr('donation.eyebrow') %>><%= content.donation.eyebrow %></span></p>
+          <h2 id="donation-title"<%- editAttr('donation.heading') %>><%= content.donation.heading %></h2>
+          <p<%- editAttr('donation.text') %>><%= content.donation.text %></p>
+        </div>
+        <div class="donation-action">
+          <a class="btn btn-primary" href="<%= safeUrl(content.donation.url, '#') %>" target="_blank" rel="noopener noreferrer">
+            <span<%- editAttr('donation.buttonLabel') %>><%= content.donation.buttonLabel %></span>
+            <%- icon('external') %>
+          </a>
+          <p class="donation-note"<%- editAttr('donation.note') %>><%= content.donation.note %></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="closing-section" aria-labelledby="closing-title">
     <div class="container closing-inner reveal">
       <p class="eyebrow eyebrow-light"><span class="eyebrow-line" aria-hidden="true"></span><span<%- editAttr('closing.eyebrow') %>><%= content.closing.eyebrow %></span></p>

@@ -85,6 +85,19 @@ export function applyHome(content, body) {
   c.closing.text = cleanText(closing.text, c.closing.text, 600);
   c.closing.buttonLabel = cleanSingleLine(closing.buttonLabel, c.closing.buttonLabel, 80);
 
+  const donation = object(body.donation);
+  const donationUrl = String(donation.url || '').trim();
+  const donationUrlWithProtocol =
+    donationUrl && !/^https?:\/\//i.test(donationUrl)
+      ? `https://${donationUrl.replace(/^\/+/, '')}`
+      : donationUrl;
+  c.donation.eyebrow = cleanSingleLine(donation.eyebrow, c.donation.eyebrow, 100);
+  c.donation.heading = cleanSingleLine(donation.heading, c.donation.heading, 180);
+  c.donation.text = cleanText(donation.text, c.donation.text, 900);
+  c.donation.buttonLabel = cleanSingleLine(donation.buttonLabel, c.donation.buttonLabel, 80);
+  c.donation.url = safeUrl(donationUrlWithProtocol, c.donation.url);
+  c.donation.note = cleanText(donation.note, c.donation.note, 500);
+
   return c;
 }
 

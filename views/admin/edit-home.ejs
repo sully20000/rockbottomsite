@@ -184,6 +184,42 @@
 
   <section class="admin-card admin-form-section">
     <div class="admin-card-head">
+      <div><p class="admin-kicker">Optional support</p><h2>Donation link</h2></div>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="donation[eyebrow]" value="<%= draft.donation.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading</span>
+        <input type="text" name="donation[heading]" value="<%= draft.donation.heading %>" maxlength="180">
+      </label>
+      <label class="field field-full">
+        <span>Description</span>
+        <textarea name="donation[text]" rows="3" maxlength="900"><%= draft.donation.text %></textarea>
+      </label>
+      <label class="field">
+        <span>Button label</span>
+        <input type="text" name="donation[buttonLabel]" value="<%= draft.donation.buttonLabel %>" maxlength="80">
+      </label>
+      <label class="field">
+        <span>Donation URL</span>
+        <input type="url" name="donation[url]" value="<%= draft.donation.url %>" maxlength="300" placeholder="https://ko-fi.com/yourname">
+      </label>
+      <label class="field field-full">
+        <span>Small note under the button</span>
+        <input type="text" name="donation[note]" value="<%= draft.donation.note %>" maxlength="500">
+      </label>
+    </div>
+    <div class="admin-tip">
+      <span><%- icon('info') %></span>
+      <p>Keep this optional and separate from the support information. Do not suggest that donations unlock content or change how the site works.</p>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
       <div><p class="admin-kicker">The last word</p><h2>Closing message</h2></div>
     </div>
     <div class="admin-form-grid">
