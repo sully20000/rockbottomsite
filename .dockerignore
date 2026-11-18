@@ -9,6 +9,7 @@ backups
 .env.*
 README.md
 archive
+rock-bottom.html
 .vscode
 .idea
 .DS_Store
