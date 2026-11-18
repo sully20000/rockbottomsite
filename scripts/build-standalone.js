@@ -198,7 +198,7 @@ async function build() {
     (match, fontPath) => `url('${dataUri(path.join('public', fontPath.replace(/^\//, '')), 'font/woff2')}')`,
   );
   const mainJs = read('public/js/main.js');
-  const favicon = dataUri('public/favicon.svg', 'image/svg+xml');
+  const favicon = dataUri('public/favicon-192.png', 'image/png');
 
   const images = new Map();
   const embedImage = (src) => {
@@ -227,7 +227,7 @@ async function build() {
   /* Embed fonts, stylesheet, favicon and photography. */
   html = html
     .replace('<link rel="stylesheet" href="/css/styles.css">', `<style>\n${css}\n${legalCss}\n  </style>`)
-    .replace(/href="\/favicon\.svg"/g, `href="${favicon}"`)
+    .replace(/href="\/favicon-192\.png"/g, `href="${favicon}"`)
     .replace(/src="(\/images\/[^"]+)"/g, (match, src) => `src="${embedImage(src)}"`);
 
   /* Give the page a top anchor and keep every internal link local. */

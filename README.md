@@ -457,7 +457,7 @@ This approach avoids analytics cookies and personal data. Still, keep the privac
 │   ├── js/admin.js           Sidebar, repeaters, previews, uploads, copy buttons
 │   ├── images/               Built-in nature photography
 │   ├── fonts/                Local Fraunces and Manrope WOFF2 files
-│   └── favicon.svg
+│   └── favicon-192.png
 ├── scripts/
 │   ├── create-admin.js       Create or reset an administrator
 │   ├── backup.js             Database snapshot plus uploads
