@@ -230,6 +230,7 @@ Unique anonymous visitors, total page views, today's figures, a 14-day chart, an
 | `NODE_ENV` | `development` | Set to `production` in production. Enables HSTS, view caching and long asset caching. |
 | `TRUST_PROXY` | unset | Set to `1` when running behind Nginx, Caddy, a load balancer or a container platform. Required for correct `req.secure`, secure cookies and client IP rate limiting. |
 | `DATA_DIR` | `./data` | Directory for the SQLite database and setup token. Must be persistent and writable. |
+| `UPLOAD_DIR` | `./uploads` | Directory for uploaded images. Must be persistent and writable. |
 | `BACKUP_DIR` | `./backups` | Destination for `npm run backup`. |
 | `BASE_URL` | request host | Optional canonical origin, for example `https://example.org`. Used for canonical URLs, Open Graph images, `robots.txt` and `sitemap.xml`. |
 | `ADMIN_SETUP_TOKEN` | random | Optional fixed first-run setup token. Ignored once an administrator exists. |

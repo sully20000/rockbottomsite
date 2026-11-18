@@ -7,7 +7,8 @@ ENV NODE_ENV=production \
     PORT=3000 \
     HOST=0.0.0.0 \
     TRUST_PROXY=1 \
-    DATA_DIR=/app/data
+    DATA_DIR=/app/data \
+    UPLOAD_DIR=/app/uploads
 
 WORKDIR /app
 

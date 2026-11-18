@@ -4,9 +4,8 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import crypto from 'node:crypto';
 import path from 'node:path';
-import { mkdirSync } from 'node:fs';
 import { getSession, constantTimeEqual } from './auth.js';
-import { getContent } from './db.js';
+import { getContent, root, uploadDir } from './db.js';
 import {
   dailyMessage,
   formatDate,
@@ -20,11 +19,8 @@ import {
 import { ICON_LABELS, ICON_NAMES, icon } from './icons.js';
 import { publicRouter } from './public-routes.js';
 import { adminRouter } from './admin-routes.js';
-import { root } from './db.js';
 
 const isProd = process.env.NODE_ENV === 'production';
-const uploadDir = path.join(root, 'uploads');
-mkdirSync(uploadDir, { recursive: true });
 
 export const app = express();
 

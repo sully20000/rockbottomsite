@@ -13,9 +13,9 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { db, dbPath, dataDir, root } from '../src/db.js';
+import { db, dbPath, dataDir, root, uploadDir } from '../src/db.js';
 
-const uploadsDir = path.join(root, 'uploads');
+const uploadsDir = uploadDir;
 const targetRoot = process.env.BACKUP_DIR
   ? path.resolve(process.env.BACKUP_DIR)
   : path.join(root, 'backups');

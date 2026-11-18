@@ -21,6 +21,7 @@ import {
   dbPath,
   dataDir,
   root,
+  uploadDir,
 } from './db.js';
 import {
   adminCount,
@@ -50,9 +51,6 @@ import { dailyMessageIndex, safeImage } from './content-utils.js';
 import { applyInlineChange } from './inline-edit.js';
 
 export const adminRouter = express.Router();
-
-const uploadDir = path.join(root, 'uploads');
-fs.mkdirSync(uploadDir, { recursive: true });
 
 const SESSION_COOKIE = 'rb_admin';
 const SESSION_MAX_AGE = 12 * 60 * 60 * 1000;

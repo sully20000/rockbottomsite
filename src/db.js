@@ -12,6 +12,11 @@ const dataDir = process.env.DATA_DIR
 mkdirSync(dataDir, { recursive: true });
 
 export const dbPath = path.join(dataDir, 'rockbottom.db');
+export const uploadDir = process.env.UPLOAD_DIR
+  ? path.resolve(process.env.UPLOAD_DIR)
+  : path.join(root, 'uploads');
+
+mkdirSync(uploadDir, { recursive: true });
 export const db = new DatabaseSync(dbPath);
 
 db.exec(`
