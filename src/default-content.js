@@ -9,7 +9,7 @@
 export const defaultContent = {
   site: {
     name: 'Rock Bottom',
-    title: 'Rock Bottom – The Way Back',
+    title: 'Rock Bottom – The Way Back | Mental Health Support',
     tagline: 'A hand reaching back, from someone who has been there.',
     metaDescription:
       'You are not alone. This will not last forever. There is a way back. Personal experience, gentle steps and UK mental health support for anyone at rock bottom.',
