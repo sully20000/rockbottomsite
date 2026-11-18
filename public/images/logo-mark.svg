@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-label="Rock Bottom – The Way Back">
+  <defs>
+    <radialGradient id="rb-sun" cx="50%" cy="46%" r="55%">
+      <stop offset="0%" stop-color="#fffbe8"/>
+      <stop offset="38%" stop-color="#ffec7a"/>
+      <stop offset="72%" stop-color="#ffc21a"/>
+      <stop offset="100%" stop-color="#ff9808"/>
+    </radialGradient>
+    <radialGradient id="rb-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff3b0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fff3b0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rb-ray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd94d"/>
+      <stop offset="100%" stop-color="#ff8a00"/>
+    </linearGradient>
+    <linearGradient id="rb-mountain" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#173253"/>
+      <stop offset="100%" stop-color="#06111f"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="120" cy="92" r="64" fill="url(#rb-glow)"/>
+
+  <g fill="url(#rb-ray)">
+    <path id="rb-ray" d="M120 7 127 44 113 44Z"/>
+    <use href="#rb-ray" transform="rotate(30 120 92)"/>
+    <use href="#rb-ray" transform="rotate(60 120 92)"/>
+    <use href="#rb-ray" transform="rotate(90 120 92)"/>
+    <use href="#rb-ray" transform="rotate(120 120 92)"/>
+    <use href="#rb-ray" transform="rotate(150 120 92)"/>
+    <use href="#rb-ray" transform="rotate(180 120 92)"/>
+    <use href="#rb-ray" transform="rotate(210 120 92)"/>
+    <use href="#rb-ray" transform="rotate(240 120 92)"/>
+    <use href="#rb-ray" transform="rotate(270 120 92)"/>
+    <use href="#rb-ray" transform="rotate(300 120 92)"/>
+    <use href="#rb-ray" transform="rotate(330 120 92)"/>
+  </g>
+
+  <circle cx="120" cy="92" r="50" fill="url(#rb-sun)"/>
+  <circle cx="120" cy="92" r="50" fill="none" stroke="#fff7cd" stroke-width="1.2" opacity="0.85"/>
+
+  <path d="M0 150 28 138 56 130 82 134 104 118 120 108 138 118 160 124 184 130 212 140 240 150Z" fill="url(#rb-mountain)"/>
+  <path d="M104 118 114 132 126 124 120 108Z" fill="#ffb02e" opacity="0.9"/>
+  <path d="M82 134 104 118 114 132 88 140Z" fill="#ffcf4a" opacity="0.45"/>
+  <path d="M0 150 40 143 80 147 120 138 160 146 200 142 240 150Z" fill="#040e1a" opacity="0.9"/>
+
+  <g fill="none" stroke="#07182b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M120 76V94"/>
+    <path d="M120 82 101 78"/>
+    <path d="M120 82 139 78"/>
+    <path d="M120 94 111 108"/>
+    <path d="M120 94 129 108"/>
+  </g>
+  <circle cx="120" cy="70" r="5.5" fill="#07182b"/>
+</svg>

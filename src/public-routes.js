@@ -139,6 +139,19 @@ publicRouter.get('/privacy', recordVisit, (req, res) => {
   res.render('page', { pageKey: 'privacy', page });
 });
 
+publicRouter.get('/faq', recordVisit, (req, res) => {
+  const content = getContent('published');
+  commonLocals(req, res, content);
+  res.locals.pageTitle = 'Questions and where to get help';
+  res.locals.pageDescription = content.faq.intro;
+  res.locals.canonicalUrl = `${res.locals.origin}/faq`;
+  res.locals.ogImage = absoluteImage(res.locals.origin, content.hero.image);
+  res.locals.noindex = false;
+  res.locals.bodyClass = 'page-faq';
+  res.locals.preview = false;
+  res.render('faq');
+});
+
 publicRouter.get('/support', (req, res) => res.redirect(301, '/#support'));
 publicRouter.get('/emergency', (req, res) => res.redirect(301, '/#emergency'));
 publicRouter.get('/cookies', (req, res) => res.redirect(301, '/privacy'));
@@ -171,6 +184,7 @@ publicRouter.get('/sitemap.xml', (req, res) => {
     });
   const urls = [
     { loc: `${origin}/`, priority: '1.0' },
+    { loc: `${origin}/faq`, priority: '0.7' },
     { loc: `${origin}/disclaimer`, priority: '0.4' },
     { loc: `${origin}/privacy`, priority: '0.3' },
   ];

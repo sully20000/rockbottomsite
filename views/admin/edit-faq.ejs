@@ -1,0 +1,112 @@
+<%- include('../partials/admin-head') %>
+
+<div class="admin-page-heading">
+  <div>
+    <p class="admin-kicker">Questions page</p>
+    <h2>Where to go when you are not sure where to start</h2>
+    <p>Short, practical answers that point people to the right support. You can add, remove or reword every question.</p>
+  </div>
+  <a class="admin-button admin-button-ghost" href="/admin/preview/faq" target="_blank" rel="noopener"><%- icon('eye') %> Preview draft</a>
+</div>
+
+<form method="post" action="/admin/edit/faq" class="admin-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="eyebrow" value="<%= draft.faq.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading</span>
+        <input type="text" name="heading" value="<%= draft.faq.heading %>" maxlength="180">
+      </label>
+      <label class="field field-full">
+        <span>Introduction</span>
+        <textarea name="intro" rows="3" maxlength="900"><%= draft.faq.intro %></textarea>
+      </label>
+      <label class="field field-full">
+        <span>Important note</span>
+        <textarea name="note" rows="2" maxlength="500"><%= draft.faq.note %></textarea>
+        <small>Keep the reminder that this is signposting, not medical advice, and that 999/A&amp;E is for immediate danger.</small>
+      </label>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
+      <div><p class="admin-kicker">Questions</p><h2>Questions and where to go</h2></div>
+      <button class="admin-button admin-button-ghost" type="button" data-add-row="faq-rows" data-template="faq-row-template">
+        <%- icon('plus') %> Add a question
+      </button>
+    </div>
+
+    <div class="admin-repeater" id="faq-rows">
+      <% draft.faq.items.forEach(function(item, index) { %>
+        <fieldset class="admin-repeater-row" data-repeater-row data-index="<%= index %>">
+          <legend><span data-row-number><%= index + 1 %></span> · <%= item.question %></legend>
+          <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this question"><%- icon('trash') %></button>
+          <div class="admin-form-grid admin-form-grid-compact">
+            <label class="field field-full">
+              <span>Question</span>
+              <input type="text" name="items[<%= index %>][question]" value="<%= item.question %>" maxlength="220" required>
+            </label>
+            <label class="field field-full">
+              <span>Answer</span>
+              <textarea name="items[<%= index %>][answer]" rows="4" maxlength="2400" required><%= item.answer %></textarea>
+            </label>
+            <label class="field">
+              <span>Link label</span>
+              <input type="text" name="items[<%= index %>][linkLabel]" value="<%= item.linkLabel %>" maxlength="90">
+            </label>
+            <label class="field">
+              <span>Link destination</span>
+              <input type="text" name="items[<%= index %>][linkHref]" value="<%= item.linkHref %>" maxlength="300" placeholder="/#support">
+            </label>
+          </div>
+        </fieldset>
+      <% }) %>
+    </div>
+
+    <template id="faq-row-template">
+      <fieldset class="admin-repeater-row" data-repeater-row data-index="__INDEX__">
+        <legend><span data-row-number>New</span> · New question</legend>
+        <button class="admin-row-remove" type="button" data-remove-row aria-label="Remove this question"><%- icon('trash') %></button>
+        <div class="admin-form-grid admin-form-grid-compact">
+          <label class="field field-full">
+            <span>Question</span>
+            <input type="text" name="items[__INDEX__][question]" maxlength="220" required>
+          </label>
+          <label class="field field-full">
+            <span>Answer</span>
+            <textarea name="items[__INDEX__][answer]" rows="4" maxlength="2400" required></textarea>
+          </label>
+          <label class="field">
+            <span>Link label</span>
+            <input type="text" name="items[__INDEX__][linkLabel]" maxlength="90">
+          </label>
+          <label class="field">
+            <span>Link destination</span>
+            <input type="text" name="items[__INDEX__][linkHref]" maxlength="300" placeholder="/#support">
+          </label>
+        </div>
+      </fieldset>
+    </template>
+
+    <div class="admin-tip">
+      <span><%- icon('info') %></span>
+      <p>Use an internal link such as <code>/#support</code>, <code>/#emergency</code> or <code>/disclaimer</code>, or a full external URL. Keep answers short enough to read when someone is overwhelmed.</p>
+    </div>
+  </section>
+
+  <div class="admin-save-bar">
+    <div><strong>Save to draft</strong><span>Nothing changes publicly until you publish.</span></div>
+    <div class="admin-save-actions">
+      <a class="admin-button admin-button-ghost" href="/admin/preview/faq" target="_blank" rel="noopener"><%- icon('eye') %> Preview</a>
+      <button class="admin-button admin-button-primary" type="submit">Save draft <%- icon('check') %></button>
+    </div>
+  </div>
+</form>
+
+<%- include('../partials/admin-foot') %>

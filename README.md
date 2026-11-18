@@ -40,6 +40,7 @@ The design is deliberately warm rather than clinical: deep navy and forest green
 - Ten practical steps, written as expandable cards.
 - An anonymous “This helped me” thumbs-up under the steps, counted once per device.
 - A daily message that changes automatically each day.
+- A questions page with practical answers and direct links to the right support or emergency section.
 - Five UK support organisations with call, text and website links.
 - A prominent emergency section for 999, A&E and NHS 111.
 - A clearly labelled, independently operated community link that opens in a new tab.
@@ -54,7 +55,7 @@ The design is deliberately warm rather than clinical: deep navy and forest green
 
 - Secure sign-in with server-side sessions and CSRF protection.
 - Draft and published versions of the content, with preview, publish and discard.
-- Separate editors for the homepage, symptoms, steps, daily messages, support organisations, emergency cards, community section, design palette and legal/footer pages.
+- Separate editors for the homepage, symptoms, steps, daily messages, support organisations, emergency cards, community section, questions page, design palette and legal/footer pages.
 - Owner-only on-page editing: signed-in administrators can edit text directly on the draft preview, then save and publish.
 - Media library with validated image uploads (JPEG, PNG, WebP, AVIF, up to 8MB, up to 10 at once).
 - Anonymous visitor statistics and a 14-day chart.
@@ -110,6 +111,7 @@ The copy is **read-only**:
 - The disclaimer and privacy pages open in on-page windows instead of separate URLs.
 - There is no admin dashboard, no SQLite storage and no server-side visitor counting. The visitor strip instead shows visits on that device, stored locally.
 - The thumbs-up feedback card is hidden because its counter needs the server.
+- The questions page link opens the live website.
 - To change the content of the standalone copy, edit the live site and run `npm run build:html` again.
 
 Keep the full Node app for the editable, password-protected version.
@@ -474,6 +476,7 @@ This approach avoids analytics cookies and personal data. Still, keep the privac
 └── views/
     ├── home.ejs              Public homepage
     ├── page.ejs              Legal pages
+    ├── faq.ejs               Questions and signposting page
     ├── error.ejs             403/404/500 page
     ├── admin/                Dashboard and editor templates
     └── partials/             Headers, footers, sidebar, icons, image field

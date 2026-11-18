@@ -204,7 +204,12 @@ async function build() {
   const embedImage = (src) => {
     if (!images.has(src)) {
       const file = path.join('public', src.replace(/^\//, ''));
-      images.set(src, dataUri(file, 'image/jpeg'));
+      const mime = src.endsWith('.svg')
+        ? 'image/svg+xml'
+        : src.endsWith('.png')
+          ? 'image/png'
+          : 'image/jpeg';
+      images.set(src, dataUri(file, mime));
     }
     return images.get(src);
   };
@@ -230,6 +235,7 @@ async function build() {
     .replace('<body class="page-home">', '<body class="page-home" id="top">')
     .replace(/href="\/disclaimer"/g, 'href="#legal-disclaimer" data-open-legal="legal-disclaimer"')
     .replace(/href="\/privacy"/g, 'href="#legal-privacy" data-open-legal="legal-privacy"')
+    .replace(/href="\/faq"/g, 'href="https://rockbottomsupport.org/faq" target="_blank" rel="noopener noreferrer"')
     .replace(/href="\/#support"/g, 'href="#support"')
     .replace(/href="\/#emergency"/g, 'href="#emergency"')
     .replace(/href="\/"/g, 'href="#top"');

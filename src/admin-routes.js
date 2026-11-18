@@ -41,6 +41,7 @@ import {
   applyDaily,
   applyDesign,
   applyEmergency,
+  applyFaq,
   applyHome,
   applyPages,
   applySymptoms,
@@ -400,6 +401,27 @@ adminRouter.get('/preview/privacy', (req, res) => {
   renderDraftPage(req, res, 'privacy');
 });
 
+adminRouter.get('/preview/faq', (req, res) => {
+  const content = getContent('draft');
+  const origin = `${req.protocol}://${req.get('host')}`;
+  res.locals.content = content;
+  res.locals.dailyText = '';
+  res.locals.dailyIndex = 0;
+  res.locals.origin = origin;
+  res.locals.visitorCount = null;
+  res.locals.pageTitle = 'Questions and where to get help';
+  res.locals.pageDescription = content.faq.intro;
+  res.locals.canonicalUrl = `${origin}/admin/preview/faq`;
+  res.locals.ogImage = `${origin}${safeImage(content.hero.image, '/images/hero-forest.jpg')}`;
+  res.locals.noindex = true;
+  res.locals.bodyClass = 'page-faq is-preview';
+  res.locals.preview = true;
+  res.locals.preloadImage = '';
+  res.locals.canInlineEdit = true;
+  res.locals.editing = String(req.query.edit || '') === '1';
+  res.render('faq');
+});
+
 function renderDraftPage(req, res, key) {
   const content = getContent('draft');
   const page = content.pages[key];
@@ -433,6 +455,7 @@ const EDITORS = {
   support: { title: 'Support organisations', apply: applySupport },
   emergency: { title: 'Emergency support', apply: applyEmergency },
   community: { title: 'Community', apply: applyCommunity },
+  faq: { title: 'Questions page', apply: applyFaq },
   design: { title: 'Design & navigation', apply: applyDesign },
   pages: { title: 'Footer & legal pages', apply: applyPages },
 };

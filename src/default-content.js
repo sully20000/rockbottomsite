@@ -68,6 +68,7 @@ export const defaultContent = {
     stepsLabel: 'The way back',
     supportLabel: 'Support',
     emergencyLabel: 'Need help now',
+    faqLabel: 'Questions',
     startLabel: "I don't know where to start",
   },
 
@@ -500,6 +501,101 @@ export const defaultContent = {
     imageAlt: 'A single broad tree standing in a sunlit field beneath a wide open sky',
   },
 
+  faq: {
+    eyebrow: 'Questions people ask',
+    heading: 'Where to go when you are not sure where to start',
+    intro:
+      'When everything feels overwhelming, even finding the right kind of help can feel like too much. These are some of the questions people ask most often. There are no stupid questions here.',
+    note:
+      'This page is signposting and personal experience, not medical advice. If you or someone else is in immediate danger, call 999 or go to A&E.',
+    items: [
+      {
+        question: 'I feel like I’m at rock bottom. What can I do today?',
+        answer:
+          'You do not have to solve everything at once. Pick one small thing: breathe slowly, drink some water, step outside, or message one person you trust. If you feel unsafe or are thinking about harming yourself, please use the emergency options now. You deserve support today, not only when things feel unbearable.',
+        linkLabel: 'Start with one small step',
+        linkHref: '/#start-helper',
+      },
+      {
+        question: 'How do I get mental health support in the UK when I don’t know where to start?',
+        answer:
+          'You can speak to your GP, call NHS 111 and choose the mental health option, or contact one of the UK helplines. You do not need the perfect words or a diagnosis to ask for help. If you are not sure which service fits, start with Samaritans or Mind and they can point you in the right direction.',
+        linkLabel: 'See the UK support options',
+        linkHref: '/#support',
+      },
+      {
+        question: 'What mental health helplines and text services can I contact?',
+        answer:
+          'Samaritans: 116 123, free, 24/7. Mind: 0300 102 1234, Monday to Friday, 9am–6pm (excluding bank holidays). CALM: 0800 58 58 58, daily 5pm–midnight. Shout: text SHOUT to 85258, 24/7. SANE: 0300 304 7000, daily 4pm–10pm. Opening hours can change, so check the organisation’s website if you can.',
+        linkLabel: 'See full support details and websites',
+        linkHref: '/#support',
+      },
+      {
+        question: 'What should I say when I call a helpline?',
+        answer:
+          'You do not need a script. “I don’t know where to start” is enough. You can say how you are feeling, what has been happening, or simply that you need someone to listen. The person on the other end will help guide the conversation, and you can stop or take a break at any time.',
+        linkLabel: 'Find someone to listen',
+        linkHref: '/#support',
+      },
+      {
+        question: 'Everything feels too much. What is one small step?',
+        answer:
+          'Choose the smallest possible next step: take three slow breaths, put your feet on the floor, drink a glass of water, open a window, or send one message to someone safe. You are not failing because you cannot do everything. One small step still counts as movement.',
+        linkLabel: 'Try the ten gentle steps',
+        linkHref: '/#steps',
+      },
+      {
+        question: 'How can I support a friend who is struggling?',
+        answer:
+          'Ask how they are, listen without trying to fix everything, and let them know they are not a burden. You can help with practical things, encourage them to speak to a GP or a helpline, and keep checking in. If you believe they are in immediate danger, call 999 or stay with them while you get help.',
+        linkLabel: 'Emergency help and what to do',
+        linkHref: '/#emergency',
+      },
+      {
+        question: 'Where can I find free or low-cost mental health support?',
+        answer:
+          'Start with your GP or NHS 111 for NHS support. Mind has information and signposting, Hub of Hope lists local services, and many local Mind groups, charities, universities and workplaces offer free or low-cost help. Waiting lists vary, so it is okay to ask about several routes at once.',
+        linkLabel: 'Find local services on Hub of Hope',
+        linkHref: 'https://hubofhope.co.uk/',
+      },
+      {
+        question: 'Does faith or prayer help with mental health?',
+        answer:
+          'For some people, faith and prayer are a real source of comfort and hope. This site includes a gentle, optional invitation to ask Jesus for help. It is never a requirement, and prayer is not a substitute for professional care or emergency help. You are welcome exactly as you are.',
+        linkLabel: 'Read the gentle faith invitation',
+        linkHref: '/#faith',
+      },
+      {
+        question: 'Is this website medical advice?',
+        answer:
+          'No. This website shares one person’s lived experience and signposts to UK support. It is not medical advice, diagnosis or treatment, and it does not replace a doctor, therapist or crisis service. If you are worried about your health, please speak to a qualified professional.',
+        linkLabel: 'Read the full disclaimer',
+        linkHref: '/disclaimer',
+      },
+      {
+        question: 'What if I need help right now?',
+        answer:
+          'If you or someone else is in immediate danger, call 999 or go to your nearest A&E. For urgent mental health support in England, call NHS 111 and choose the mental health option. Samaritans are available on 116 123, 24 hours a day. Please do not wait until things feel unbearable.',
+        linkLabel: 'Emergency help now',
+        linkHref: '/#emergency',
+      },
+      {
+        question: 'Where can I talk to other people who understand?',
+        answer:
+          'There are communities where people share experiences and support one another. The mental health forum linked below is independently operated, so please read its rules and privacy information before taking part. It is not run or moderated by this website.',
+        linkLabel: 'Visit the mental health community',
+        linkHref: '/#community',
+      },
+      {
+        question: 'Can I use this site outside the UK?',
+        answer:
+          'Yes, but the support details and helplines are UK-focused. If you are outside the UK, use your local emergency number and local mental health services. The rest of the site — the personal experience and gentle steps — is here for anyone who needs it.',
+        linkLabel: 'See the support options',
+        linkHref: '/#support',
+      },
+    ],
+  },
+
   faith: {
     eyebrow: 'A gentle invitation',
     heading: 'You are welcome to ask Jesus for help',
@@ -542,6 +638,7 @@ export const defaultContent = {
     disclaimerLabel: 'Disclaimer',
     privacyLabel: 'Privacy',
     supportLabel: 'Support organisations',
+    faqLabel: 'Questions answered',
     forumLabel: 'Mental health forum',
     emergencyNote: 'If you need urgent help, call 999 or NHS 111 (England).',
     credits: 'Photography via Unsplash.',

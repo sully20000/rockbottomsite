@@ -262,6 +262,32 @@ export function applyCommunity(content, body) {
   return c;
 }
 
+export function applyFaq(content, body) {
+  const c = structuredClone(content);
+  c.faq.eyebrow = cleanSingleLine(body.eyebrow, c.faq.eyebrow, 100);
+  c.faq.heading = cleanSingleLine(body.heading, c.faq.heading, 180);
+  c.faq.intro = cleanText(body.intro, c.faq.intro, 900);
+  c.faq.note = cleanText(body.note, c.faq.note, 500);
+
+  const itemRows = rows(body.items);
+  if (itemRows.length) {
+    const items = itemRows
+      .slice(0, 40)
+      .map((row, index) => {
+        const current = c.faq.items[index] || c.faq.items[0];
+        return {
+          question: cleanSingleLine(row.question, current.question, 220),
+          answer: cleanText(row.answer, current.answer, 2400),
+          linkLabel: cleanSingleLine(row.linkLabel, current.linkLabel, 90),
+          linkHref: safeUrl(row.linkHref, current.linkHref),
+        };
+      })
+      .filter((item) => item.question && item.answer);
+    if (items.length) c.faq.items = items;
+  }
+  return c;
+}
+
 export function applyDesign(content, body) {
   const c = structuredClone(content);
   const theme = object(body.theme);
@@ -280,6 +306,7 @@ export function applyDesign(content, body) {
   c.nav.stepsLabel = cleanSingleLine(nav.stepsLabel, c.nav.stepsLabel, 60);
   c.nav.supportLabel = cleanSingleLine(nav.supportLabel, c.nav.supportLabel, 60);
   c.nav.emergencyLabel = cleanSingleLine(nav.emergencyLabel, c.nav.emergencyLabel, 60);
+  c.nav.faqLabel = cleanSingleLine(nav.faqLabel, c.nav.faqLabel, 60);
   c.nav.startLabel = cleanSingleLine(nav.startLabel, c.nav.startLabel, 80);
   return c;
 }
@@ -304,6 +331,7 @@ export function applyPages(content, body) {
   c.footer.disclaimerLabel = cleanSingleLine(footer.disclaimerLabel, c.footer.disclaimerLabel, 60);
   c.footer.privacyLabel = cleanSingleLine(footer.privacyLabel, c.footer.privacyLabel, 60);
   c.footer.supportLabel = cleanSingleLine(footer.supportLabel, c.footer.supportLabel, 60);
+  c.footer.faqLabel = cleanSingleLine(footer.faqLabel, c.footer.faqLabel, 60);
   c.footer.forumLabel = cleanSingleLine(footer.forumLabel, c.footer.forumLabel, 80);
   c.footer.emergencyNote = cleanSingleLine(footer.emergencyNote, c.footer.emergencyNote, 180);
   c.footer.credits = cleanSingleLine(footer.credits, c.footer.credits, 160);

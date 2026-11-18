@@ -2685,3 +2685,11 @@ svg {
     transition: none;
   }
 }
+
+.admin-brand-logo {
+  display: block;
+  width: 56px;
+  height: 38px;
+  flex: none;
+  object-fit: contain;
+}

@@ -1,14 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Rock Bottom – The Way Back">
-  <rect width="64" height="64" rx="15" fill="#256353"/>
-  <path d="M13 53V30a19 19 0 0 1 38 0v23" fill="none" stroke="#fffdf8" stroke-width="2.8" stroke-linecap="round"/>
-  <circle cx="32" cy="30" r="5.8" fill="#ffd88f"/>
-  <g fill="none" stroke="#ffd88f" stroke-width="2.4" stroke-linecap="round">
-    <path d="M32 12v5"/>
-    <path d="m16.5 17.5 3.4 3.4"/>
-    <path d="m47.5 17.5-3.4 3.4"/>
-    <path d="M5 30h5"/>
-    <path d="M54 30h5"/>
+  <defs>
+    <radialGradient id="rb-icon-sun" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#fffbe8"/>
+      <stop offset="55%" stop-color="#ffe15a"/>
+      <stop offset="100%" stop-color="#ff9d0a"/>
+    </radialGradient>
+    <linearGradient id="rb-icon-ray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd94d"/>
+      <stop offset="100%" stop-color="#ff8a00"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#256353"/>
+  <g fill="url(#rb-icon-ray)">
+    <path id="rb-icon-ray" d="M32 3 36 21 28 21Z"/>
+    <use href="#rb-icon-ray" transform="rotate(45 32 34)"/>
+    <use href="#rb-icon-ray" transform="rotate(90 32 34)"/>
+    <use href="#rb-icon-ray" transform="rotate(135 32 34)"/>
+    <use href="#rb-icon-ray" transform="rotate(180 32 34)"/>
+    <use href="#rb-icon-ray" transform="rotate(225 32 34)"/>
+    <use href="#rb-icon-ray" transform="rotate(270 32 34)"/>
+    <use href="#rb-icon-ray" transform="rotate(315 32 34)"/>
   </g>
-  <path d="M20 53h24" fill="none" stroke="#fffdf8" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M24 59h16" fill="none" stroke="#9fd8c3" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="32" cy="34" r="15" fill="url(#rb-icon-sun)"/>
+  <path d="M2 58 15 51 23 53 32 45 41 52 51 51 62 58Z" fill="#07182b"/>
+  <g fill="none" stroke="#07182b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 30V40"/>
+    <path d="M32 33 24 32"/>
+    <path d="M32 33 40 32"/>
+    <path d="M32 40 28 47"/>
+    <path d="M32 40 36 47"/>
+  </g>
+  <circle cx="32" cy="27" r="3" fill="#07182b"/>
 </svg>
