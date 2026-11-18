@@ -328,6 +328,24 @@
     </div>
   </section>
 
+  <section class="faith-section" aria-labelledby="faith-title">
+    <div class="container">
+      <div class="faith-card reveal">
+        <span class="faith-mark" aria-hidden="true"><%- icon('sunrise') %></span>
+        <div class="faith-copy">
+          <p class="eyebrow eyebrow-light"><span class="eyebrow-line" aria-hidden="true"></span><span<%- editAttr('faith.eyebrow') %>><%= content.faith.eyebrow %></span></p>
+          <h2 id="faith-title"<%- editAttr('faith.heading') %>><%= content.faith.heading %></h2>
+          <p class="faith-text"<%- editAttr('faith.text') %>><%= content.faith.text %></p>
+          <a class="text-link text-link-light faith-link" href="<%= safeUrl(content.faith.url, '#') %>" target="_blank" rel="noopener noreferrer">
+            <span<%- editAttr('faith.linkLabel') %>><%= content.faith.linkLabel %></span>
+            <%- icon('external') %>
+          </a>
+          <p class="faith-note"<%- editAttr('faith.note') %>><%= content.faith.note %></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section section-paper donation-section" id="donate" aria-labelledby="donation-title">
     <div class="container">
       <div class="donation-card reveal">

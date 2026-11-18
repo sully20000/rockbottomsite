@@ -85,6 +85,19 @@ export function applyHome(content, body) {
   c.closing.text = cleanText(closing.text, c.closing.text, 600);
   c.closing.buttonLabel = cleanSingleLine(closing.buttonLabel, c.closing.buttonLabel, 80);
 
+  const faith = object(body.faith);
+  const faithUrl = String(faith.url || '').trim();
+  const faithUrlWithProtocol =
+    faithUrl && !/^https?:\/\//i.test(faithUrl)
+      ? `https://${faithUrl.replace(/^\/+/, '')}`
+      : faithUrl;
+  c.faith.eyebrow = cleanSingleLine(faith.eyebrow, c.faith.eyebrow, 100);
+  c.faith.heading = cleanSingleLine(faith.heading, c.faith.heading, 180);
+  c.faith.text = cleanText(faith.text, c.faith.text, 900);
+  c.faith.note = cleanText(faith.note, c.faith.note, 500);
+  c.faith.linkLabel = cleanSingleLine(faith.linkLabel, c.faith.linkLabel, 100);
+  c.faith.url = safeUrl(faithUrlWithProtocol, c.faith.url);
+
   const donation = object(body.donation);
   const donationUrl = String(donation.url || '').trim();
   const donationUrlWithProtocol =

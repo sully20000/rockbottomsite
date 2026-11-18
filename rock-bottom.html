@@ -2919,6 +2919,74 @@ body.is-inline-editing .section-paper [data-edit]:focus {
   }
 }
 
+/* ---------- Optional faith invitation ---------- */
+
+.faith-section {
+  padding: clamp(44px, 6vw, 68px) 0;
+  background:
+    radial-gradient(circle at 84% 16%, rgba(255, 216, 143, 0.16), transparent 38%),
+    var(--surface-soft);
+}
+.faith-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+  max-width: 860px;
+  margin-inline: auto;
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid rgba(255, 253, 248, 0.18);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 253, 248, 0.06);
+}
+.faith-mark {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(255, 216, 143, 0.36);
+  border-radius: 50%;
+  background: rgba(255, 216, 143, 0.1);
+  color: var(--accent);
+}
+.faith-mark .icon {
+  width: 22px;
+  height: 22px;
+}
+.faith-copy h2 {
+  margin: 12px 0 10px;
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  letter-spacing: -0.035em;
+}
+.faith-text {
+  max-width: 680px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.faith-link {
+  margin-top: 16px;
+  font-size: 12px;
+}
+.faith-note {
+  max-width: 680px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 253, 248, 0.14);
+  color: rgba(255, 253, 248, 0.7);
+  font-size: 10.5px;
+  line-height: 1.65;
+}
+
+@media (max-width: 900px) {
+  .faith-card {
+    grid-template-columns: 1fr;
+  }
+  .faith-mark {
+    width: 44px;
+    height: 44px;
+  }
+}
+
 /* ---------- Optional donation ---------- */
 
 .donation-section {
@@ -3829,7 +3897,7 @@ body.is-inline-editing .section-paper [data-edit]:focus {
         </div>
         <div class="helpful-action">
           <form method="post" action="/helpful" class="helpful-form" data-helpful-form data-voted-label="Counted — thank you">
-            <input type="hidden" name="_csrf" value="UvDq-G6D54dUHNabnO_kMgUaZ0s8bJ39">
+            <input type="hidden" name="_csrf" value="4sf5_53LyAYuHx5VMSwgdF_H9vUK1f8u">
             <button class="helpful-button" type="submit" data-helpful-button >
               <span class="helpful-button-icon" aria-hidden="true"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-thumbs-up"></use></svg></span>
               <span data-helpful-button-label>This helped me</span>
@@ -4087,6 +4155,24 @@ body.is-inline-editing .section-paper [data-edit]:focus {
           <svg class="icon " aria-hidden="true" focusable="false"><use href="#i-external"></use></svg>
         </a>
         <p class="community-disclaimer"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-info"></use></svg> <span>This link opens an independently operated external forum in a new tab. Rock Bottom – The Way Back does not run or moderate this community, and its moderation, privacy and safety arrangements are outside our control. Please read their rules and privacy information before taking part.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="faith-section" aria-labelledby="faith-title">
+    <div class="container">
+      <div class="faith-card reveal">
+        <span class="faith-mark" aria-hidden="true"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-sunrise"></use></svg></span>
+        <div class="faith-copy">
+          <p class="eyebrow eyebrow-light"><span class="eyebrow-line" aria-hidden="true"></span><span>A gentle invitation</span></p>
+          <h2 id="faith-title">You are welcome to ask Jesus for help</h2>
+          <p class="faith-text">Whether you’re religious or not, I would also invite you to ask Jesus for help in your current situation. You’ll be surprised how much this can help. Just say one simple prayer for help and guidance — no pressure.</p>
+          <a class="text-link text-link-light faith-link" href="https://biblestudyforyou.com/bible-verses-about-jesus-always-being-with-us/" target="_blank" rel="noopener noreferrer">
+            <span>Read Bible verses about Jesus always being with us</span>
+            <svg class="icon " aria-hidden="true" focusable="false"><use href="#i-external"></use></svg>
+          </a>
+          <p class="faith-note">This is a personal invitation, not a requirement. Prayer is not a substitute for professional care or emergency help. The link opens an independent Bible study website in a new tab.</p>
+        </div>
       </div>
     </div>
   </section>

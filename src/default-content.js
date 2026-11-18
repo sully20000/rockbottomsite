@@ -500,6 +500,17 @@ export const defaultContent = {
     imageAlt: 'A single broad tree standing in a sunlit field beneath a wide open sky',
   },
 
+  faith: {
+    eyebrow: 'A gentle invitation',
+    heading: 'You are welcome to ask Jesus for help',
+    text:
+      'Whether you’re religious or not, I would also invite you to ask Jesus for help in your current situation. You’ll be surprised how much this can help. Just say one simple prayer for help and guidance — no pressure.',
+    note:
+      'This is a personal invitation, not a requirement. Prayer is not a substitute for professional care or emergency help. The link opens an independent Bible study website in a new tab.',
+    linkLabel: 'Read Bible verses about Jesus always being with us',
+    url: 'https://biblestudyforyou.com/bible-verses-about-jesus-always-being-with-us/',
+  },
+
   donation: {
     eyebrow: 'Optional support',
     heading: 'Help keep this website running',

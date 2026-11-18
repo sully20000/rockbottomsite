@@ -184,6 +184,42 @@
 
   <section class="admin-card admin-form-section">
     <div class="admin-card-head">
+      <div><p class="admin-kicker">Personal invitation</p><h2>Faith section</h2></div>
+    </div>
+    <div class="admin-form-grid">
+      <label class="field">
+        <span>Eyebrow</span>
+        <input type="text" name="faith[eyebrow]" value="<%= draft.faith.eyebrow %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Heading</span>
+        <input type="text" name="faith[heading]" value="<%= draft.faith.heading %>" maxlength="180">
+      </label>
+      <label class="field field-full">
+        <span>Invitation</span>
+        <textarea name="faith[text]" rows="4" maxlength="900"><%= draft.faith.text %></textarea>
+      </label>
+      <label class="field">
+        <span>Link label</span>
+        <input type="text" name="faith[linkLabel]" value="<%= draft.faith.linkLabel %>" maxlength="100">
+      </label>
+      <label class="field">
+        <span>Link URL</span>
+        <input type="url" name="faith[url]" value="<%= draft.faith.url %>" maxlength="300" placeholder="https://example.com">
+      </label>
+      <label class="field field-full">
+        <span>Small note</span>
+        <textarea name="faith[note]" rows="2" maxlength="500"><%= draft.faith.note %></textarea>
+      </label>
+    </div>
+    <div class="admin-tip">
+      <span><%- icon('info') %></span>
+      <p>Keep this gentle and optional. Make clear that prayer is not a substitute for professional care or emergency help.</p>
+    </div>
+  </section>
+
+  <section class="admin-card admin-form-section">
+    <div class="admin-card-head">
       <div><p class="admin-kicker">Optional support</p><h2>Donation link</h2></div>
     </div>
     <div class="admin-form-grid">

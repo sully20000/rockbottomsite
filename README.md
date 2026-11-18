@@ -44,6 +44,7 @@ The design is deliberately warm rather than clinical: deep navy and forest green
 - A prominent emergency section for 999, A&E and NHS 111.
 - A clearly labelled, independently operated community link that opens in a new tab.
 - An optional Ko-fi donation card for hosting and running costs. Nothing on the site is locked behind a donation.
+- A gentle, optional faith invitation to ask Jesus for help, with an external link to related Bible verses. It is explicitly not a requirement and not a substitute for professional or emergency care.
 - A persistent, privacy-respecting visitor counter.
 - Disclaimer and privacy pages.
 - Responsive navigation, reduced-motion support, skip link, focus styles and semantic landmarks.
@@ -174,7 +175,7 @@ The controls, editable markers and editor script are only included for an authen
 
 ### Homepage
 
-Site name, metadata, hero copy and image, the opening letter, the disclaimer, the three “where to start” options, the optional donation link, the closing section, and the visitor label/note.
+Site name, metadata, hero copy and image, the opening letter, the disclaimer, the three “where to start” options, the optional faith invitation, the optional donation link, the closing section, and the visitor label/note.
 
 ### Symptoms section
 
