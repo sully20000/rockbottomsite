@@ -87,6 +87,17 @@ app.use((req, res, next) => {
   next();
 });
 
+// Keep one URL for each page: /faq/ and /faq should not both return 200.
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+  if (req.path.length <= 1 || !req.path.endsWith('/')) return next();
+  const queryIndex = req.originalUrl.indexOf('?');
+  const pathname = queryIndex === -1 ? req.originalUrl : req.originalUrl.slice(0, queryIndex);
+  const query = queryIndex === -1 ? '' : req.originalUrl.slice(queryIndex);
+  const clean = pathname.replace(/\/+$/, '') || '/';
+  return res.redirect(301, `${clean}${query}`);
+});
+
 app.use(
   '/uploads',
   express.static(uploadDir, {
