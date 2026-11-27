@@ -30,7 +30,7 @@
   <% if (preloadImage) { %>
   <link rel="preload" href="<%= preloadImage %>" as="image" fetchpriority="high">
   <% } %>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css?v=<%= assetVersion %>">
   <style>
     :root {
       --bg: <%= content.theme.background %>;

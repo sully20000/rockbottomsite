@@ -150,6 +150,7 @@ app.use((req, res, next) => {
   res.locals.noindex = false;
   res.locals.bodyClass = '';
   res.locals.preloadImage = '';
+  res.locals.assetVersion = '2026-11-27-1';
   res.locals.canInlineEdit = false;
   res.locals.editing = false;
   res.locals.dailyIndex = 0;

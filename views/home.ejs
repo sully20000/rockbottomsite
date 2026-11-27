@@ -424,7 +424,7 @@
 
 <%- include('partials/owner-edit-link', { editHref: '/admin/preview?edit=1' }) %>
 <%- include('partials/inline-editor') %>
-<% if (canInlineEdit) { %><script src="/js/inline-edit.js" defer></script><% } %>
-<script src="/js/main.js" defer></script>
+<% if (canInlineEdit) { %><script src="/js/inline-edit.js?v=<%= assetVersion %>" defer></script><% } %>
+<script src="/js/main.js?v=<%= assetVersion %>" defer></script>
 </body>
 </html>

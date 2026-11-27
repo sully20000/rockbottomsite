@@ -226,7 +226,7 @@ async function build() {
 
   /* Embed fonts, stylesheet, favicon and photography. */
   html = html
-    .replace('<link rel="stylesheet" href="/css/styles.css">', `<style>\n${css}\n${legalCss}\n  </style>`)
+    .replace(/<link rel="stylesheet" href="\/css\/styles\.css[^"]*">/, `<style>\n${css}\n${legalCss}\n  </style>`)
     .replace(/href="\/favicon-192\.png"/g, `href="${favicon}"`)
     .replace(/src="(\/images\/[^"]+)"/g, (match, src) => `src="${embedImage(src)}"`);
 
@@ -262,7 +262,7 @@ async function build() {
 
   /* Inline the site script and the standalone-only behaviour. */
   html = html.replace(
-    '<script src="/js/main.js" defer></script>',
+    /<script src="\/js\/main\.js[^"]*" defer><\/script>/,
     `<script>\n${mainJs}\n${extraScript}\n</script>`,
   );
 
