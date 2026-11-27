@@ -2790,128 +2790,145 @@ body.is-inline-editing .section-paper [data-edit]:focus {
 
 /* ---------- Helpful feedback ---------- */
 
+.helpful-section {
+  padding: clamp(54px, 8vw, 90px) 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 216, 143, 0.16), transparent 46%),
+    var(--surface-soft);
+}
 .helpful-card {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: clamp(22px, 4vw, 42px);
-  margin-top: clamp(38px, 6vw, 62px);
-  padding: clamp(24px, 4vw, 38px);
-  border: 1px solid rgba(255, 253, 248, 0.16);
+  gap: clamp(24px, 4vw, 46px);
+  padding: clamp(28px, 4vw, 44px);
+  border: 1px solid rgba(23, 61, 51, 0.14);
   border-radius: var(--radius-lg);
   background:
-    radial-gradient(circle at 7% 16%, rgba(255, 216, 143, 0.14), transparent 38%),
-    linear-gradient(135deg, rgba(255, 253, 248, 0.085), rgba(255, 253, 248, 0.02));
-  box-shadow: 0 24px 60px rgba(10, 40, 32, 0.18);
+    radial-gradient(circle at 7% 14%, rgba(255, 216, 143, 0.34), transparent 38%),
+    var(--paper);
+  color: var(--paper-ink);
+  box-shadow: 0 30px 80px rgba(7, 30, 24, 0.28);
 }
 .helpful-mark {
   display: grid;
   place-items: center;
-  width: 58px;
-  height: 58px;
-  border: 1px solid rgba(255, 216, 143, 0.36);
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border: 1px solid rgba(37, 99, 83, 0.16);
   border-radius: 50%;
-  background: rgba(255, 216, 143, 0.1);
-  color: var(--accent);
+  background: rgba(37, 99, 83, 0.08);
+  color: #2f6a4f;
 }
 .helpful-mark .icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
-.helpful-copy h3 {
-  margin: 14px 0 10px;
-  font-size: clamp(1.6rem, 3vw, 2.3rem);
-  letter-spacing: -0.03em;
+.helpful-copy h2 {
+  margin: 14px 0 12px;
+  color: var(--paper-ink);
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  letter-spacing: -0.035em;
+  line-height: 1.08;
 }
 .helpful-copy > p:last-child {
-  max-width: 570px;
-  color: var(--muted);
-  font-size: 14px;
+  max-width: 590px;
+  color: rgba(23, 61, 51, 0.76);
+  font-size: 14.5px;
   line-height: 1.75;
 }
 .helpful-action {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 10px;
+  gap: 12px;
 }
 .helpful-form {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 11px;
+  gap: 12px;
 }
 .helpful-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  padding: 13px 21px;
+  padding: 16px 24px;
   border: 0;
   border-radius: 999px;
   background: var(--accent);
   color: #173d33;
   cursor: pointer;
   font-family: var(--sans);
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1;
   text-transform: uppercase;
-  box-shadow: 0 12px 30px rgba(255, 216, 143, 0.2);
+  box-shadow: 0 14px 34px rgba(37, 99, 83, 0.18);
   transition: transform 0.25s var(--ease), background 0.2s ease, box-shadow 0.25s ease;
+  animation: helpfulPulse 3.6s ease-in-out infinite;
 }
 .helpful-button:hover:not(:disabled) {
   transform: translateY(-2px);
   background: #ffe3a6;
-  box-shadow: 0 16px 38px rgba(255, 216, 143, 0.28);
 }
 .helpful-button:disabled {
-  background: rgba(255, 253, 248, 0.22);
-  color: var(--ink);
+  background: rgba(37, 99, 83, 0.14);
+  color: #2f6a4f;
   cursor: default;
   box-shadow: none;
+  animation: none;
 }
 .helpful-button-icon {
   display: inline-flex;
 }
 .helpful-button-icon .icon {
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
 }
 .helpful-count {
   display: flex;
   align-items: baseline;
-  gap: 7px;
-  color: var(--muted);
-  font-size: 11.5px;
+  gap: 8px;
+  color: rgba(23, 61, 51, 0.72);
+  font-size: 12px;
   line-height: 1.4;
   text-align: right;
 }
 .helpful-count strong {
-  color: var(--accent);
+  color: #2f6a4f;
   font-family: var(--serif);
-  font-size: 1.9rem;
+  font-size: 2.6rem;
   font-weight: 400;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.045em;
   line-height: 1;
 }
 .helpful-error {
-  max-width: 260px;
-  color: #ffe1c8;
+  max-width: 280px;
+  color: #9b3d2f;
   font-size: 11.5px;
   line-height: 1.5;
   text-align: right;
 }
-
+@keyframes helpfulPulse {
+  0%, 100% {
+    box-shadow: 0 14px 34px rgba(37, 99, 83, 0.18), 0 0 0 0 rgba(37, 99, 83, 0.18);
+  }
+  50% {
+    box-shadow: 0 14px 34px rgba(37, 99, 83, 0.18), 0 0 0 12px rgba(37, 99, 83, 0);
+  }
+}
 @media (max-width: 900px) {
   .helpful-card {
     grid-template-columns: 1fr;
     align-items: start;
   }
   .helpful-mark {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
   }
   .helpful-action,
   .helpful-form {
@@ -2924,6 +2941,11 @@ body.is-inline-editing .section-paper [data-edit]:focus {
   .helpful-count,
   .helpful-error {
     text-align: left;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .helpful-button {
+    animation: none;
   }
 }
 
@@ -4094,25 +4116,30 @@ body.is-inline-editing .section-paper [data-edit]:focus {
         <a class="text-link text-link-light" href="#start-helper"><span>Not sure which one? Start here</span> <svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a>
       </div>
 
-      <div class="helpful-card reveal" id="helpful" aria-labelledby="helpful-title">
+    </div>
+  </section>
+
+  <section class="helpful-section" id="helpful" aria-labelledby="helpful-title">
+    <div class="container">
+      <div class="helpful-card reveal">
         <span class="helpful-mark" aria-hidden="true"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-thumbs-up"></use></svg></span>
         <div class="helpful-copy">
-          <p class="eyebrow eyebrow-light"><span class="eyebrow-line" aria-hidden="true"></span><span>A small kindness</span></p>
-          <h3 id="helpful-title">Did this help you today?</h3>
+          <p class="eyebrow eyebrow-dark"><span class="eyebrow-line" aria-hidden="true"></span><span>A small kindness</span></p>
+          <h2 id="helpful-title">Did this help you today?</h2>
           <p>If something on this page made today feel a little lighter, you can let me know. It is anonymous, and counted once per device.</p>
         </div>
         <div class="helpful-action">
           <form method="post" action="/helpful" class="helpful-form" data-helpful-form data-voted-label="Counted — thank you">
-            <input type="hidden" name="_csrf" value="SUS4pl4k5JoXxk2xhH2NDTx_5y1TGjGB">
+            <input type="hidden" name="_csrf" value="RZPCVYQ1A6sU5-UUYxmq6co1qLfaTbLO">
             <button class="helpful-button" type="submit" data-helpful-button >
               <span class="helpful-button-icon" aria-hidden="true"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-thumbs-up"></use></svg></span>
               <span data-helpful-button-label>This helped me</span>
             </button>
             <p class="helpful-count" role="status" aria-live="polite">
-              <strong data-helpful-count>0</strong>
+              <strong data-helpful-count>1</strong>
               <span data-helpful-count-label
                     data-one="person has found this helpful"
-                    data-many="people have found this helpful">people have found this helpful</span>
+                    data-many="people have found this helpful">person has found this helpful</span>
             </p>
             <p class="helpful-error" data-helpful-error hidden>That could not be counted just now. Please try again.</p>
           </form>

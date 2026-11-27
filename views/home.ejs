@@ -216,11 +216,16 @@
         <a class="text-link text-link-light" href="#start-helper"><span<%- editAttr('ui.notSure') %>><%= content.ui.notSure %></span> <%- icon('arrow-right') %></a>
       </div>
 
-      <div class="helpful-card reveal" id="helpful" aria-labelledby="helpful-title">
+    </div>
+  </section>
+
+  <section class="helpful-section" id="helpful" aria-labelledby="helpful-title">
+    <div class="container">
+      <div class="helpful-card reveal">
         <span class="helpful-mark" aria-hidden="true"><%- icon('thumbs-up') %></span>
         <div class="helpful-copy">
-          <p class="eyebrow eyebrow-light"><span class="eyebrow-line" aria-hidden="true"></span><span<%- editAttr('ui.helpfulEyebrow') %>><%= content.ui.helpfulEyebrow %></span></p>
-          <h3 id="helpful-title"<%- editAttr('ui.helpfulHeading') %>><%= content.ui.helpfulHeading %></h3>
+          <p class="eyebrow eyebrow-dark"><span class="eyebrow-line" aria-hidden="true"></span><span<%- editAttr('ui.helpfulEyebrow') %>><%= content.ui.helpfulEyebrow %></span></p>
+          <h2 id="helpful-title"<%- editAttr('ui.helpfulHeading') %>><%= content.ui.helpfulHeading %></h2>
           <p<%- editAttr('ui.helpfulText') %>><%= content.ui.helpfulText %></p>
         </div>
         <div class="helpful-action">
