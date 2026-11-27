@@ -137,6 +137,10 @@ export const defaultContent = {
       },
     ],
     closeLabel: 'Close',
+    textSupportHeading: 'Don’t feel like talking on the phone?',
+    textSupportText: 'Send a simple text saying SHOUT to 85258 to get support.',
+    textSupportAction: 'Text 85258',
+    textSupportNumber: '85258',
   },
 
   symptoms: {

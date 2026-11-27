@@ -36,6 +36,7 @@ The design is deliberately warm rather than clinical: deep navy and forest green
 
 - Full-bleed hero with smooth scrolling into the opening “about me” letter.
 - An “I don't know where to start” dialog with three gentle routes: talk to someone, immediate support, and one small first step.
+- A text-support shortcut for anyone who does not feel like talking on the phone: text SHOUT to 85258.
 - Visible disclaimer, symptoms that are explicitly not a diagnosis, and a safety note about medication.
 - Ten practical steps, written as expandable cards.
 - An anonymous “This helped me” thumbs-up under the steps, counted once per device.

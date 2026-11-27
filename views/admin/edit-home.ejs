@@ -145,6 +145,22 @@
         <span>Close button label</span>
         <input type="text" name="startHelper[closeLabel]" value="<%= draft.startHelper.closeLabel %>" maxlength="40">
       </label>
+      <label class="field field-full">
+        <span>Text support heading</span>
+        <input type="text" name="startHelper[textSupportHeading]" value="<%= draft.startHelper.textSupportHeading %>" maxlength="120">
+      </label>
+      <label class="field field-full">
+        <span>Text support message</span>
+        <input type="text" name="startHelper[textSupportText]" value="<%= draft.startHelper.textSupportText %>" maxlength="300">
+      </label>
+      <label class="field">
+        <span>Text support button label</span>
+        <input type="text" name="startHelper[textSupportAction]" value="<%= draft.startHelper.textSupportAction %>" maxlength="60">
+      </label>
+      <label class="field">
+        <span>Text support number</span>
+        <input type="text" name="startHelper[textSupportNumber]" value="<%= draft.startHelper.textSupportNumber %>" maxlength="20" placeholder="85258">
+      </label>
     </div>
 
     <div class="admin-repeater admin-repeater-static">

@@ -65,6 +65,26 @@ export function applyHome(content, body) {
   c.startHelper.heading = cleanSingleLine(helper.heading, c.startHelper.heading, 160);
   c.startHelper.intro = cleanText(helper.intro, c.startHelper.intro, 900);
   c.startHelper.closeLabel = cleanSingleLine(helper.closeLabel, c.startHelper.closeLabel, 40);
+  c.startHelper.textSupportHeading = cleanSingleLine(
+    helper.textSupportHeading,
+    c.startHelper.textSupportHeading,
+    120,
+  );
+  c.startHelper.textSupportText = cleanText(
+    helper.textSupportText,
+    c.startHelper.textSupportText,
+    300,
+  );
+  c.startHelper.textSupportAction = cleanSingleLine(
+    helper.textSupportAction,
+    c.startHelper.textSupportAction,
+    60,
+  );
+  c.startHelper.textSupportNumber = cleanSingleLine(
+    helper.textSupportNumber,
+    c.startHelper.textSupportNumber,
+    20,
+  );
 
   const optionRows = rows(helper.options);
   if (optionRows.length) {

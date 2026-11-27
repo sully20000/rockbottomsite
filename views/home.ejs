@@ -152,6 +152,18 @@
           </article>
         <% }) %>
       </div>
+
+      <aside class="text-support-card reveal" aria-labelledby="text-support-title">
+        <span class="text-support-icon" aria-hidden="true"><%- icon('message-text') %></span>
+        <div class="text-support-copy">
+          <h3 id="text-support-title"<%- editAttr('startHelper.textSupportHeading') %>><%= content.startHelper.textSupportHeading %></h3>
+          <p<%- editAttr('startHelper.textSupportText') %>><%= content.startHelper.textSupportText %></p>
+        </div>
+        <a class="text-support-button" href="<%= smsHref(content.startHelper.textSupportNumber, '#') %>">
+          <%- icon('message-text') %>
+          <span<%- editAttr('startHelper.textSupportAction') %>><%= content.startHelper.textSupportAction %></span>
+        </a>
+      </aside>
     </div>
   </section>
 
